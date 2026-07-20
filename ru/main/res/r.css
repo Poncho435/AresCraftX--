@@ -1,0 +1,23 @@
+/* r */
+@media(max-width:1024px){.ranks-grid,.news-grid{grid-template-columns:repeat(2,1fr)}.links-grid,.dev-grid{grid-template-columns:repeat(2,1fr)}.contacts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+.hamburger{display:flex;align-items:center;justify-content:center}.mobile-nav{display:flex}.nav-links{display:none!important}.nav-username{display:none!important}
+.hero-content{flex-direction:column;text-align:center;gap:20px}.hero-title{font-size:1.5rem}.hero-logo{width:80px;height:80px}.hero-buttons{justify-content:center}
+.connect-ip-box{flex-direction:column;text-align:center}.connect-ip-right{flex-wrap:wrap;justify-content:center}
+.modes-grid,.actions-grid,.links-grid,.socials-grid{grid-template-columns:1fr}.ranks-grid,.news-grid,.contacts-grid,.features-grid{grid-template-columns:1fr}
+.profile-card{flex-direction:column;gap:12px;text-align:center}.profile-card-left{flex-direction:column}.profile-card-desc{max-width:100%}
+.form-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr;gap:20px}
+.navbar-inner{padding:0 14px}.main-wrapper{padding:78px 14px 30px}
+.settings-layout{flex-direction:column}.settings-nav{width:100%;border-right:none;border-bottom:1px solid var(--border);flex-direction:row;overflow-x:auto;padding:6px}
+.theme-cards{grid-template-columns:repeat(2,1fr)}.mode-details{grid-template-columns:1fr}.about-stats{flex-wrap:wrap}.stats-grid{grid-template-columns:1fr 1fr}
+.modal-content{padding:20px 14px;width:96%}.page-hero-content h1{font-size:1.5rem}
+.profile-view-stats{grid-template-columns:1fr}.profile-view-avatar{width:48px;height:48px}.profile-view-name{font-size:1rem}
+.link-editor-row{flex-wrap:wrap}.link-label-input{width:100%}.link-url-input{width:100%}
+.nav-lang-select{display:none}
+}
+@media(max-width:600px){
+.code-box{width:38px;height:44px;font-size:1.2rem}.footer-top{grid-template-columns:1fr}.footer-bottom{flex-direction:column;gap:8px;text-align:center}
+.stats-grid{grid-template-columns:1fr}.dev-grid{grid-template-columns:1fr}.theme-cards{grid-template-columns:1fr 1fr}
+.connect-ip-value{font-size:1.1rem}.hero-title{font-size:1.3rem}.hero-subtitle{font-size:.9rem}
+.btn-hero-primary,.btn-hero-secondary{padding:12px 20px;font-size:.9rem}.section-header h2{font-size:1rem}
+.about-card{padding:20px}.arescord-banner{padding:24px 16px}.contacts-grid{grid-template-columns:1fr}}

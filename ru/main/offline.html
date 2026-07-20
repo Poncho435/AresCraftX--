@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нет подключения — AresCraftX</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:#06050a;color:#ece4d8;font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px}
+        .container{max-width:400px}
+        .icon{width:80px;height:80px;border-radius:20px;background:rgba(255,136,0,.1);color:#ff8800;font-size:2.5rem;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;animation:pulse 2s ease-in-out infinite}
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.7}}
+        h1{font-size:1.5rem;font-weight:800;margin-bottom:8px;color:#ece4d8}
+        p{color:#9a8a78;font-size:.92rem;line-height:1.6;margin-bottom:24px}
+        button{padding:12px 28px;background:linear-gradient(135deg,#ff8800,#e06500);border:none;border-radius:12px;color:#0a0808;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s}
+        button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,136,0,.2)}
+        .dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
+        .dot{width:8px;height:8px;border-radius:50%;background:#ff8800;animation:dotBounce 1.4s ease-in-out infinite}
+        .dot:nth-child(2){animation-delay:.2s}
+        .dot:nth-child(3){animation-delay:.4s}
+        @keyframes dotBounce{0%,80%,100%{transform:scale(.6);opacity:.3}40%{transform:scale(1);opacity:1}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>Нет подключения к интернету</h1>
+        <p>Проверьте подключение и попробуйте снова. AresCraftX вернётся как только появится сеть.</p>
+        <button onclick="window.location.reload()">🔄 Попробовать снова</button>
+        <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+</body>
+</html>

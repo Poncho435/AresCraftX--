@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AresCraftX — Admin Panel</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../main/res/v.css">
+    <link rel="stylesheet" href="../main/res/b.css">
+    <link rel="stylesheet" href="../main/res/n.css">
+    <link rel="stylesheet" href="../main/res/l.css">
+    <link rel="stylesheet" href="../main/res/c.css">
+    <link rel="stylesheet" href="../main/res/p.css">
+    <link rel="stylesheet" href="../main/res/o.css">
+    <link rel="stylesheet" href="../main/res/r.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+</head>
+<body>
+<div class="bg-canvas">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-grid"></div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="../main/index.html" class="nav-brand">
+            <img src="../assets/logo.png" class="nav-logo" alt="AresCraftX">
+            <span class="nav-title">ARESCRAFTX</span>
+            <span class="admin-badge">ADMIN</span>
+        </a>
+        <div class="nav-links">
+            <a href="../main/index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+            <a href="../main/server.html" class="nav-link"><i class="fas fa-server"></i> Server</a>
+            <a href="admin.html" class="nav-link active"><i class="fas fa-shield-alt"></i> Admin</a>
+        </div>
+        <div class="nav-actions">
+            <button class="nav-icon-btn" id="theme-switcher" title="Тема"><i class="fas fa-moon"></i></button>
+            <div class="nav-user-btn">
+                <img src="" id="user-avatar" class="nav-avatar" alt="">
+                <span id="user-name" class="nav-username">Admin</span>
+            </div>
+        </div>
+        <button class="hamburger" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    <div class="mobile-nav-brand"><img src="../assets/logo.png" style="width:28px;border-radius:6px"> <span style="font-weight:800;color:var(--accent)">ADMIN</span></div>
+    <a href="../main/index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Главная</a>
+    <a href="../main/server.html" class="mobile-nav-link"><i class="fas fa-server"></i> Server</a>
+    <a href="admin.html" class="mobile-nav-link active"><i class="fas fa-shield-alt"></i> Admin</a>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrapper admin-wrapper">
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-title">NAVIGATION</div>
+                <button class="admin-sidebar-btn active" data-admin-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
+                <button class="admin-sidebar-btn" data-admin-tab="users"><i class="fas fa-users"></i> Users</button>
+                <button class="admin-sidebar-btn" data-admin-tab="settings"><i class="fas fa-cog"></i> Site Settings</button>
+                <button class="admin-sidebar-btn" data-admin-tab="server"><i class="fas fa-server"></i> Server</button>
+                <button class="admin-sidebar-btn" data-admin-tab="news"><i class="fas fa-newspaper"></i> News</button>
+            </div>
+            <div class="admin-sidebar-section">
+                <div class="admin-sidebar-title">SECURITY</div>
+                <button class="admin-sidebar-btn" data-admin-tab="logs"><i class="fas fa-history"></i> Log</button>
+                <button class="admin-sidebar-btn" data-admin-tab="bans"><i class="fas fa-ban"></i> Bans</button>
+            </div>
+            <div class="admin-sidebar-section" style="margin-top:auto">
+                <a href="../main/index.html" class="admin-sidebar-btn" style="color:var(--text-2)"><i class="fas fa-arrow-left"></i> Back to site</a>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="admin-content">
+
+            <!-- DASHBOARD -->
+            <div class="admin-tab active" id="tab-dashboard">
+                <div class="admin-header">
+                    <h2><i class="fas fa-chart-line"></i> Dashboard</h2>
+                    <span class="admin-header-date" id="current-date"></span>
+                </div>
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--accent-soft);color:var(--accent)"><i class="fas fa-users"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">Users</span>
+                            <span class="admin-stat-value" id="stat-total-users">—</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--green-soft);color:var(--green)"><i class="fas fa-signal"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">Server online</span>
+                            <span class="admin-stat-value" id="stat-online">—</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--blue-soft);color:var(--blue)"><i class="fas fa-calendar"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">Days to launch</span>
+                            <span class="admin-stat-value" id="stat-days-launch">—</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--purple-soft);color:var(--purple)"><i class="fas fa-shield-alt"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">2FA enabled</span>
+                            <span class="admin-stat-value" id="stat-2fa">—</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--red-soft);color:var(--red)"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">Incidents</span>
+                            <span class="admin-stat-value" id="stat-incidents">0</span>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon" style="background:var(--cyan-soft);color:var(--cyan)"><i class="fas fa-clock"></i></div>
+                        <div class="admin-stat-body">
+                            <span class="admin-stat-label">Days in dev</span>
+                            <span class="admin-stat-value" id="stat-days-dev">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="admin-quick-actions">
+                        <button class="admin-action-btn" onclick="switchAdminTab('settings')"><i class="fas fa-cog"></i> Settings</button>
+                        <button class="admin-action-btn" onclick="switchAdminTab('news')"><i class="fas fa-plus"></i> Add новость</button>
+                        <button class="admin-action-btn" onclick="switchAdminTab('users')"><i class="fas fa-user-plus"></i> Users</button>
+                        <button class="admin-action-btn" onclick="switchAdminTab('logs')"><i class="fas fa-history"></i> Log</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- USERS -->
+            <div class="admin-tab" id="tab-users">
+                <div class="admin-header">
+                    <h2><i class="fas fa-users"></i> Users</h2>
+                    <div class="admin-header-actions">
+                        <input type="text" id="user-search" placeholder="Search by name/email..." class="admin-search">
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr><th>Пользователь</th><th>Email</th><th>Статус</th><th>2FA</th><th>Роль</th><th>Бан</th><th>Последний вход</th><th>Действия</th></tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr><td colspan="7" style="text-align:center;color:var(--text-3)">Загрузка...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS -->
+            <div class="admin-tab" id="tab-settings">
+                <div class="admin-header">
+                    <h2><i class="fas fa-cog"></i> Site Settings</h2>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Developer Plans</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-rocket"></i> Server launch date</label>
+                            <input type="date" id="set-launch-date" value="2026-09-01">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-code"></i> Development start date</label>
+                            <input type="date" id="set-dev-start" value="2026-01-01">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-code-branch"></i> Site version</label>
+                            <input type="text" id="set-site-version" value="2.0.0">
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-toggle-on"></i> Toggles</h3>
+                    <div class="admin-toggle-grid">
+                        <div class="admin-toggle-row">
+                            <div><strong>Donations open</strong><span>Show privileges and ranks</span></div>
+                            <label class="toggle-switch"><input type="checkbox" id="set-donations-open"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="admin-toggle-row">
+                            <div><strong>Registration open</strong><span>Allow new users to register</span></div>
+                            <label class="toggle-switch"><input type="checkbox" id="set-registration-open" checked><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="admin-toggle-row">
+                            <div><strong>Maintenance mode</strong><span>Show a placeholder instead of the site</span></div>
+                            <label class="toggle-switch"><input type="checkbox" id="set-maintenance"><span class="toggle-slider"></span></label>
+                        </div>
+                        <div class="admin-toggle-row">
+                            <div><strong>Show online</strong><span>Display player count</span></div>
+                            <label class="toggle-switch"><input type="checkbox" id="set-show-online" checked><span class="toggle-slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-bullhorn"></i> Announcement Banner</h3>
+                    <div class="form-group">
+                        <label>Announcement text (empty = hide)</label>
+                        <input type="text" id="set-announcement" placeholder="Например: Server откроется 1 сентября!">
+                    </div>
+                    <div class="form-group">
+                        <label>Тип</label>
+                        <select id="set-announcement-type">
+                            <option value="info">Info (blue)</option>
+                            <option value="warning">Warning (yellow)</option>
+                            <option value="success">Success (green)</option>
+                            <option value="danger">Important (red)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="admin-buttons">
+                    <button class="btn-primary" id="save-settings-btn"><i class="fas fa-save"></i> Save Settings</button>
+                </div>
+            </div>
+
+            <!-- SERVER -->
+            <div class="admin-tab" id="tab-server">
+                <div class="admin-header">
+                    <h2><i class="fas fa-server"></i> Server Settings</h2>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-plug"></i> Connection</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-globe"></i> IP Адрес</label>
+                            <input type="text" id="set-server-ip" value="play.arescraftx.online">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-code-branch"></i> Версии</label>
+                            <input type="text" id="set-server-versions" value="1.20–1.21.11">
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-gamepad"></i> Modes</h3>
+                    <div id="modes-config">
+                        <div class="admin-mode-row">
+                            <div class="form-group" style="flex:2"><label>Name</label><input type="text" value="Анархия"></div>
+                            <div class="form-group" style="flex:3"><label>Description</label><input type="text" value="Кастомные механики, разрешено всё кроме правил"></div>
+                            <div class="form-group" style="flex:1"><label>Enabled</label><select><option value="1" selected>Да</option><option value="0">Нет</option></select></div>
+                        </div>
+                        <div class="admin-mode-row">
+                            <div class="form-group" style="flex:2"><label>Name</label><input type="text" value="Ванила+"></div>
+                            <div class="form-group" style="flex:3"><label>Description</label><input type="text" value="Классическое выживание с дополнениями"></div>
+                            <div class="form-group" style="flex:1"><label>Enabled</label><select><option value="1" selected>Да</option><option value="0">Нет</option></select></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-gem"></i> Ranks / Donate</h3>
+                    <div class="admin-toggle-row" style="margin-bottom:16px">
+                        <div><strong>Show ranks</strong><span>Display the Donate section on the server page</span></div>
+                        <label class="toggle-switch"><input type="checkbox" id="set-ranks-visible"><span class="toggle-slider"></span></label>
+                    </div>
+                    <div id="ranks-config">
+                        <p style="color:var(--text-3);font-size:.85rem">Ранги будут добавлены через редактор после запуска</p>
+                    </div>
+                </div>
+                <div class="admin-buttons">
+                    <button class="btn-primary" id="save-server-btn"><i class="fas fa-save"></i> Save</button>
+                </div>
+            </div>
+
+            <!-- NEWS -->
+            <div class="admin-tab" id="tab-news">
+                <div class="admin-header">
+                    <h2><i class="fas fa-newspaper"></i> News</h2>
+                    <button class="btn-primary btn-sm" id="add-news-btn"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <!-- News form -->
+                <div class="admin-card" id="news-form-card" style="display:none">
+                    <h3><i class="fas fa-edit"></i> Edit Post</h3>
+                    <div class="form-group">
+                        <label><i class="fas fa-heading"></i> Title</label>
+                        <input type="text" id="news-title" placeholder="Title новости">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Content</label>
+                        <textarea id="news-content" rows="4" placeholder="Content новости..."></textarea>
+                    </div>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar"></i> Дата</label>
+                            <input type="text" id="news-date" placeholder="Июль 2026">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> Category</label>
+                            <select id="news-category">
+                                <option value="update">Update</option>
+                                <option value="event">Event</option>
+                                <option value="important">Important</option>
+                                <option value="info">Info</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" id="news-edit-id" value="">
+                    <div class="admin-buttons">
+                        <button class="btn-primary" id="save-news-btn"><i class="fas fa-save"></i> Save</button>
+                        <button class="btn-secondary" id="cancel-news-btn">Отмена</button>
+                    </div>
+                </div>
+                <!-- News list -->
+                <div class="admin-card">
+                    <div id="news-list-admin">
+                        <div style="text-align:center;color:var(--text-3);padding:20px">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGS -->
+            <div class="admin-tab" id="tab-logs">
+                <div class="admin-header">
+                    <h2><i class="fas fa-history"></i> Log безопасности</h2>
+                    <input type="text" id="log-search" placeholder="Search by action..." class="admin-search">
+                </div>
+                <div class="admin-card">
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead><tr><th>Время</th><th>Пользователь</th><th>Действие</th><th>Устройство</th><th>IP</th></tr></thead>
+                            <tbody id="logs-table-body">
+                                <tr><td colspan="5" style="text-align:center;color:var(--text-3)">Загрузка...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANS -->
+            <div class="admin-tab" id="tab-bans">
+                <div class="admin-header">
+                    <h2><i class="fas fa-ban"></i> Ban Management</h2>
+                    <div class="admin-header-actions">
+                        <button class="admin-action-btn" onclick="adminBroadcast()"><i class="fas fa-envelope"></i> Рассылка</button>
+                        <button class="admin-action-btn" onclick="adminPushAll()"><i class="fas fa-bell"></i> Push всем</button>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-plus-circle"></i> Ban User</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Username, Email или UUID</label>
+                            <input type="text" id="ban-user-id" placeholder="Poncho435 / email@x.com / UUID">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-exclamation-circle"></i> Reason</label>
+                            <input type="text" id="ban-reason" placeholder="Нарушение правил">
+                        </div>
+                    </div>
+                    <button class="btn-danger" id="ban-btn"><i class="fas fa-ban"></i> Ban (permanent)</button>
+                </div>
+                <div class="admin-card">
+                    <h3><i class="fas fa-list"></i> Banned Users</h3>
+                    <div id="bans-list" style="color:var(--text-3);text-align:center;padding:20px">Загрузка...</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../main/security.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

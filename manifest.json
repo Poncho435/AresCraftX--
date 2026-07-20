@@ -1,0 +1,22 @@
+{
+    "name": "AresCraftX",
+    "short_name": "AresCraftX",
+    "description": "Minecraft-экосистема нового поколения — сервер, лаунчер, античит и платформа для общения",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#06050a",
+    "theme_color": "#ff8800",
+    "orientation": "any",
+    "lang": "ru",
+    "categories": ["games", "entertainment"],
+    "icons": [
+        {
+            "src": "/ru/assets/logo.png",
+            "sizes": "88x88",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "prefer_related_applications": false
+}

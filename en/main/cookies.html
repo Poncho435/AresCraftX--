@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie-политика — AresCraftX</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="res/v.css"><link rel="stylesheet" href="res/b.css"><link rel="stylesheet" href="res/n.css"><link rel="stylesheet" href="res/l.css"><link rel="stylesheet" href="res/c.css"><link rel="stylesheet" href="res/p.css"><link rel="stylesheet" href="res/o.css"><link rel="stylesheet" href="res/r.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .policy-page{max-width:800px;margin:0 auto;padding:100px 24px 60px}
+        .policy-page h1{font-size:1.8rem;font-weight:800;color:var(--accent);margin-bottom:8px}
+        .policy-page .policy-updated{font-size:.82rem;color:var(--text-3);margin-bottom:32px;display:flex;align-items:center;gap:8px}
+        .policy-page h2{font-size:1.15rem;font-weight:700;color:var(--text-1);margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+        .policy-page h2 i{color:var(--accent);font-size:.9rem}
+        .policy-page p,.policy-page li{font-size:.92rem;color:var(--text-2);line-height:1.7;margin-bottom:8px}
+        .policy-page ul{padding-left:20px;margin-bottom:12px}
+        .policy-page li{margin-bottom:6px}
+        .policy-page strong{color:var(--text-1)}
+        .policy-page a{color:var(--accent)}
+        .cookie-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.85rem}
+        .cookie-table th{text-align:left;padding:10px 14px;background:var(--bg-card);color:var(--text-1);font-weight:700;border-bottom:2px solid var(--border)}
+        .cookie-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-2)}
+        .cookie-table tr:hover td{background:var(--accent-soft)}
+        .policy-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+        .policy-nav a{padding:8px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text-2);font-size:.82rem;font-weight:600;transition:.2s;text-decoration:none;display:flex;align-items:center;gap:6px}
+        .policy-nav a:hover{border-color:var(--border-hover);color:var(--accent);background:var(--accent-soft)}
+        .policy-nav a.active{background:var(--accent-soft);color:var(--accent);border-color:var(--border-hover)}
+    </style>
+</head>
+<body>
+<div class="bg-canvas"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div><div class="bg-orb bg-orb-3"></div><div class="bg-grid"></div></div>
+
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-brand"><img src="../assets/logo.png" class="nav-logo" alt=""><span class="nav-title">ARESCRAFTX</span></a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+            <a href="server.html" class="nav-link"><i class="fas fa-server"></i> Сервер</a>
+            <a href="community.html" class="nav-link"><i class="fas fa-users"></i> Сообщество</a>
+        </div>
+        <div class="nav-actions"><button class="nav-icon-btn" id="theme-switcher" title="Тема"><i class="fas fa-moon"></i></button></div>
+    </div>
+</nav>
+
+<div class="policy-page">
+    <h1><i class="fas fa-cookie-bite"></i> Cookie-политика</h1>
+    <div class="policy-updated"><i class="fas fa-calendar"></i> Последнее обновление: 19 июля 2026 г.</div>
+
+    <div class="policy-nav">
+        <a href="privacy.html"><i class="fas fa-shield-alt"></i> Конфиденциальность</a>
+        <a href="cookies.html" class="active"><i class="fas fa-cookie-bite"></i> Cookie</a>
+        <a href="terms.html"><i class="fas fa-file-contract"></i> Условия</a>
+        <a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i> Отказ</a>
+    </div>
+
+    <h2><i class="fas fa-question-circle"></i> 1. Что такое Cookie</h2>
+    <p>Cookie — это небольшие текстовые файлы, которые сохраняются на вашем устройстве при посещении сайта. Они помогают сайту работать корректно и предоставлять вам лучший опыт использования.</p>
+
+    <h2><i class="fas fa-list"></i> 2. Какие Cookie мы используем</h2>
+
+    <table class="cookie-table">
+        <thead>
+            <tr><th>Cookie</th><th>Назначение</th><th>Хранение</th><th>Тип</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>sb-*-auth-token</strong></td>
+                <td>Авторизация Supabase — поддерживает вашу сессию входа</td>
+                <td>Сессия</td>
+                <td>Обязательные</td>
+            </tr>
+            <tr>
+                <td><strong>theme</strong></td>
+                <td>Ваша выбранная тема оформления (тёмная/светлая/системная)</td>
+                <td>localStorage</td>
+                <td>Функциональные</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2><i class="fas fa-check-circle"></i> 3. Обязательные Cookie</h2>
+    <p>Эти Cookie необходимы для работы Сайта. Без них вы не сможете авторизоваться и использовать функционал аккаунта:</p>
+    <ul>
+        <li><strong>sb-*-auth-token</strong> — токен авторизации Supabase. Без этого cookie вы будете разлогинены.</li>
+    </ul>
+
+    <h2><i class="fas fa-palette"></i> 4. Функциональные Cookie</h2>
+    <p>Эти Cookie улучшают ваш опыт использования Сайта, но не являются обязательными:</p>
+    <ul>
+        <li><strong>theme</strong> — сохраняет выбранную тему. Если удалить — сайт вернётся к системной теме.</li>
+    </ul>
+
+    <h2><i class="fas fa-ban"></i> 5. Cookie, которые мы НЕ используем</h2>
+    <ul>
+        <li>❌ Рекламные cookie</li>
+        <li>❌ Отслеживающие cookie третьих лиц</li>
+        <li>❌ Аналитические cookie (Google Analytics и т.п.)</li>
+        <li>❌ Социальные виджеты (Facebook Pixel и т.п.)</li>
+    </ul>
+
+    <h2><i class="fas fa-cog"></i> 6. Управление Cookie</h2>
+    <p>Вы можете управлять cookie через настройки браузера:</p>
+    <ul>
+        <li><strong>Chrome:</strong> Настройки → Конфиденциальность и безопасность → Cookie</li>
+        <li><strong>Firefox:</strong> Настройки → Приватность и защита → Cookie</li>
+        <li><strong>Safari:</strong> Настройки → Конфиденциальность → Cookie</li>
+        <li><strong>Edge:</strong> Настройки → Cookie и разрешения сайтов</li>
+    </ul>
+    <p>Обратите внимание: удаление обязательных cookie приведёт к выходу из аккаунта и невозможности использования авторизованных функций.</p>
+
+    <h2><i class="fas fa-envelope"></i> 7. Контакты</h2>
+    <p>По вопросам о cookie-политике:</p>
+    <ul>
+        <li><strong>Email:</strong> <a href="mailto:arescraftx@gmail.com">arescraftx@gmail.com</a></li>
+        <li><strong>Telegram:</strong> <a href="https://t.me/arescraftx" target="_blank" rel="noopener noreferrer">@arescraftx</a></li>
+        <li><strong>Discord:</strong> <a href="https://discord.gg/JqzG7THVZ5" target="_blank" rel="noopener noreferrer">discord.gg/JqzG7THVZ5</a></li>
+    </ul>
+</div>
+
+<script>
+(function(){const ALL_THEMES=['dark','light','crimson','emerald','ocean','royal','cyber','midnight','sunset','lavender','mono'];let cTh=localStorage.getItem('acx_theme')||'dark';function aTh(t){cTh=t;localStorage.setItem('acx_theme',t);const h=document.documentElement;if(ALL_THEMES.includes(t)){h.setAttribute('data-theme',t);h.style.colorScheme=(t==='light'||t==='midnight'||t==='ocean')?'light':'dark'}else{h.removeAttribute('data-theme');h.style.colorScheme=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'}}document.getElementById('theme-switcher')?.addEventListener('click',()=>{const idx=ALL_THEMES.indexOf(cTh);aTh(ALL_THEMES[(idx+1)%ALL_THEMES.length])});aTh(cTh)})();
+</script>
+</body>
+</html>

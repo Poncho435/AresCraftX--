@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AresCraftX — About the Project</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../assets/logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="../assets/logo.png">
+    <link rel="mask-icon" href="../assets/logo.png" color="#ff8800">
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#ff8800">
+    <link rel="stylesheet" href="res/v.css"><link rel="stylesheet" href="res/b.css"><link rel="stylesheet" href="res/n.css"><link rel="stylesheet" href="res/l.css"><link rel="stylesheet" href="res/c.css"><link rel="stylesheet" href="res/p.css"><link rel="stylesheet" href="res/o.css"><link rel="stylesheet" href="res/r.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="AresCraftX — Minecraft Ecosystem">
+    <meta property="og:description" content="Minecraft server with unique modes, anti-cheat, launcher and communication platform">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arescraftx.online/en/main/index.html">
+    <meta property="og:site_name" content="AresCraftX">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://arescraftx.online/ru/assets/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://arescraftx.online/ru/assets/logo.png">
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg-canvas">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-particles" id="particles"></div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="../assets/logo.png" class="nav-logo" alt="AresCraftX">
+            <span class="nav-title">ARESCRAFTX</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+            <a href="server.html" class="nav-link"><i class="fas fa-server"></i> Server</a>
+            <a href="community.html" class="nav-link"><i class="fas fa-users"></i> Community</a>
+            <div class="nav-dropdown">
+                <a class="nav-link"><i class="fas fa-cube"></i> Projects <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="../projects/checkers/index.html" class="dropdown-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div><span class="dropdown-item-title">AresChecker</span><span class="dropdown-item-desc">Anti-cheat system</span></div>
+                    </a>
+                    <a href="../projects/launchers/index.html" class="dropdown-item">
+                        <i class="fas fa-rocket"></i>
+                        <div><span class="dropdown-item-title">AresLaunch</span><span class="dropdown-item-desc">Minecraft launcher</span></div>
+                    </a>
+                    <a href="../projects/aresgram/index.html" class="dropdown-item">
+                        <i class="fas fa-comments"></i>
+                        <div><span class="dropdown-item-title">AresGram</span><span class="dropdown-item-desc">Communication platform</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <button class="nav-icon-btn" id="theme-switcher" title="Theme"><i class="fas fa-moon"></i></button>
+            <button class="nav-icon-btn nav-icon-badge" id="notif-btn" title="Notifications"><i class="fas fa-bell"></i><span class="nav-badge" id="notif-badge" style="display:none">0</span></button>
+            <button class="nav-icon-btn nav-icon-badge" id="friends-btn" title="Friends"><i class="fas fa-user-friends"></i><span class="nav-badge" id="friends-badge" style="display:none">0</span></button>
+            <button class="nav-icon-btn" id="settings-btn" title="Settings"><i class="fas fa-cog"></i></button>
+            <div class="nav-dropdown admin-dropdown-wrap" id="admin-nav-dropdown" style="display:none">
+                <a class="nav-link nav-admin-link"><i class="fas fa-shield-alt"></i> Admin <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                <div class="nav-dropdown-menu nav-dropdown-admin">
+                    <a href="../admin/admin.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i><div><span class="dropdown-item-title">Panel</span><span class="dropdown-item-desc">Admin panel</span></div></a>
+                    <a class="dropdown-item" id="admin-broadcast-link"><i class="fas fa-envelope"></i><div><span class="dropdown-item-title">Broadcast</span><span class="dropdown-item-desc">Email all</span></div></a>
+                    <a class="dropdown-item" id="admin-push-all-link"><i class="fas fa-bell"></i><div><span class="dropdown-item-title">Push</span><span class="dropdown-item-desc">Notification all</span></div></a>
+                    <a class="dropdown-item" id="admin-news-link"><i class="fas fa-newspaper"></i><div><span class="dropdown-item-title">News</span><span class="dropdown-item-desc">Management</span></div></a>
+                    <a class="dropdown-item" id="admin-ban-link"><i class="fas fa-ban"></i><div><span class="dropdown-item-title">Ban</span><span class="dropdown-item-desc">Users</span></div></a>
+                    <a class="dropdown-item" id="admin-logs-link"><i class="fas fa-clipboard-list"></i><div><span class="dropdown-item-title">Logs</span><span class="dropdown-item-desc">Security</span></div></a>
+                    <a class="dropdown-item" id="admin-settings-link"><i class="fas fa-sliders-h"></i><div><span class="dropdown-item-title">Settings</span><span class="dropdown-item-desc">Site</span></div></a>
+                </div>
+            </div>
+            <div class="nav-user-btn" id="profile-btn">
+                <img src="" id="user-avatar" class="nav-avatar" alt="">
+                <span id="user-name" class="nav-username">Player</span><span class="nav-status-indicator" style="background:var(--green);box-shadow:0 0 8px rgba(68,221,102,.4)"></span>
+            </div>
+            <select id="lang-select" class="nav-lang-select" title="Language">
+                <option value="ru">RU</option>
+                <option value="en" selected>EN</option>
+            </select>
+            <button class="hamburger" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- NOTIFICATION DROPDOWN -->
+<div class="notif-dropdown" id="notif-dropdown" style="position:fixed;top:60px;right:20px;z-index:10001">
+    <div class="notif-dropdown-header">
+        <h4><i class="fas fa-bell" style="color:var(--accent)"></i> Notifications <span id="notif-count">0</span></h4>
+        <div style="display:flex;gap:6px">
+            <button class="mark-read-btn" id="clear-read-btn" title="Clear read"><i class="fas fa-broom"></i></button>
+            <button class="mark-read-btn" id="mark-all-read-btn"><i class="fas fa-check-double"></i> Read all</button>
+        </div>
+    </div>
+    <div class="notif-list" id="notif-list"></div>
+</div>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    <div class="mobile-nav-brand"><img src="../assets/logo.png" style="width:28px;border-radius:6px"> <span style="font-weight:800;color:var(--accent)">ARESCRAFTX</span></div>
+    <a href="index.html" class="mobile-nav-link active"><i class="fas fa-home"></i> Home</a>
+    <a href="server.html" class="mobile-nav-link"><i class="fas fa-server"></i> Server</a>
+    <a href="community.html" class="mobile-nav-link"><i class="fas fa-users"></i> Community</a>
+    <div class="mobile-nav-separator"></div>
+    <div class="mobile-nav-subtitle">Projects</div>
+    <a href="../projects/checkers/index.html" class="mobile-nav-link"><i class="fas fa-shield-alt"></i> AresChecker</a>
+    <a href="../projects/launchers/index.html" class="mobile-nav-link"><i class="fas fa-rocket"></i> AresLaunch</a>
+    <a href="../projects/aresgram/index.html" class="mobile-nav-link"><i class="fas fa-comments"></i> AresGram</a>
+    <div class="mobile-nav-separator"></div>
+    <a href="../admin/admin.html" class="mobile-nav-link admin-link" style="display:none;color:var(--red)"><i class="fas fa-shield-alt"></i> Admin Panel</a>
+    <a href="#" class="mobile-nav-link" id="mobile-friends-link"><i class="fas fa-user-friends"></i> Friends</a>
+    <a href="#" class="mobile-nav-link" id="mobile-settings-link"><i class="fas fa-cog"></i> Settings</a>
+    <a href="../auth/auth.html" class="mobile-nav-link" id="mobile-logout-link"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrapper">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-logo-wrap">
+                <div class="hero-logo-ring"></div>
+                <img src="../assets/logo.png" class="hero-logo" id="hero-avatar" alt="AresCraftX">
+            </div>
+            <div class="hero-text">
+                <div class="hero-badge"><i class="fas fa-fire"></i> Project in Development</div>
+                <h1 class="hero-title"><span class="hero-greeting" id="welcome-message">Welcome!</span></h1>
+                <p class="hero-subtitle" id="daily-quote">AresCraftX — a Minecraft server with unique game modes, a growing ecosystem of projects and an active community.</p>
+                <div class="hero-buttons">
+                    <a href="server.html" class="btn-hero-primary"><i class="fas fa-play"></i> Go to Server</a>
+                    <a href="community.html" class="btn-hero-secondary"><i class="fas fa-users"></i> Community</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2><i class="fas fa-bolt"></i> Features</h2>
+            <span class="section-badge">6 features</span>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-purple"><i class="fas fa-shield-alt"></i></div>
+                <h3>2FA Protection</h3>
+                <p>Two-factor authentication to protect your account from hacking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-blue"><i class="fas fa-users-cog"></i></div>
+                <h3>Sessions</h3>
+                <p>Manage active sessions. Terminate foreign ones in one click.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-cyan"><i class="fas fa-comments"></i></div>
+                <h3>AresGram</h3>
+                <p>A platform for convenient communication between players in the ecosystem.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-green"><i class="fas fa-bell"></i></div>
+                <h3>Push Notifications</h3>
+                <p>Instant alerts about friend requests, security events and news.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-gold"><i class="fas fa-palette"></i></div>
+                <h3>11 Themes</h3>
+                <p>Customize the site to your liking — from dark to lavender theme.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrap fi-red"><i class="fas fa-lock"></i></div>
+                <h3>Security</h3>
+                <p>Action log, device control and password leak protection.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+        <div class="section-header">
+            <h2><i class="fas fa-info-circle"></i> About the Project</h2>
+        </div>
+        <div class="about-card">
+            <div class="about-text">
+                <h3>AresCraftX — more than a server</h3>
+                <p><strong>AresCraftX</strong> is an ecosystem of Minecraft projects, starting with a Java Edition server and expanding to a launcher, anti-cheat and communication platform.</p>
+                <p>The project was founded in <strong>2021</strong>, but soon closed. In <strong>2025</strong> there was an attempt to reopen — the server ran for 6 days and then closed. On <strong>June 24, 2025</strong> the project was restarted, and now in <strong>2026</strong> a complete overhaul from scratch has begun.</p>
+                <p>The server supports versions <strong>1.20–1.21.11</strong> Java Edition and will be available at <strong>play.arescraftx.online</strong>.</p>
+            </div>
+            <div class="about-stats">
+                <div class="about-stat">
+                    <span class="about-stat-num">2021</span>
+                    <span class="about-stat-label">Founded</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-num">2025</span>
+                    <span class="about-stat-label">6 days</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-num">2026</span>
+                    <span class="about-stat-label">Restarted</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BANNER -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2><i class="fas fa-chart-bar"></i> Project Statistics</h2>
+            <span class="section-badge">Live</span>
+        </div>
+        <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);">
+            <div class="stat-card">
+                <div class="stat-card-icon stat-icon-orange"><i class="fas fa-calendar-alt"></i></div>
+                <div class="stat-card-body">
+                    <span class="stat-label">Days until launch</span>
+                    <span class="stat-value" id="days-until-launch">—</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon stat-icon-purple"><i class="fas fa-clock"></i></div>
+                <div class="stat-card-body">
+                    <span class="stat-label">Days in development</span>
+                    <span class="stat-value" id="days-in-dev">—</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon stat-icon-green"><i class="fas fa-users"></i></div>
+                <div class="stat-card-body">
+                    <span class="stat-label">Server online</span>
+                    <span class="stat-value" id="online-count">—</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon stat-icon-cyan"><i class="fas fa-code"></i></div>
+                <div class="stat-card-body">
+                    <span class="stat-label">Site version</span>
+                    <span class="stat-value" id="site-version-display">2.1.0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="roadmap-section">
+        <div class="section-header">
+            <h2><i class="fas fa-road"></i> Roadmap</h2>
+            <span class="section-badge">2026</span>
+        </div>
+        <div class="about-card">
+            <div class="roadmap">
+                <div class="roadmap-item done">
+                    <div class="roadmap-icon roadmap-done"><i class="fas fa-check"></i></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <h4>Project Foundation</h4>
+                        <p>2021 — first server tests, then closure</p>
+                    </div>
+                </div>
+                <div class="roadmap-item done">
+                    <div class="roadmap-icon roadmap-done"><i class="fas fa-check"></i></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <h4>Reopening Attempt</h4>
+                        <p>2025 — server ran for 6 days and closed</p>
+                    </div>
+                </div>
+                <div class="roadmap-item progress">
+                    <div class="roadmap-icon roadmap-progress"><i class="fas fa-sync-alt fa-spin"></i></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <h4>Restart from Scratch</h4>
+                        <p>2026 — new concept, website, account system, 2FA</p>
+                    </div>
+                </div>
+                <div class="roadmap-item pending">
+                    <div class="roadmap-icon roadmap-pending"><i class="fas fa-flask"></i></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <h4>Server Development</h4>
+                        <p>Setting up game modes, plugins and anti-cheat</p>
+                    </div>
+                </div>
+                <div class="roadmap-item pending">
+                    <div class="roadmap-icon roadmap-pending"><i class="fas fa-rocket"></i></div>
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-content">
+                        <h4>Public Launch</h4>
+                        <p>Anarchy + Vanilla+, ranks, full functionality</p>
+                    </div>
+                </div>
+                <div class="roadmap-item pending">
+                    <div class="roadmap-icon roadmap-pending"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <div class="roadmap-content">
+                        <h4>Expansion</h4>
+                        <p>AresGram, AresChecker, AresLaunch, new modes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEV -->
+    <section class="dev-section">
+        <div class="section-header">
+            <h2><i class="fas fa-code"></i> Development</h2>
+            <span class="section-badge">Team</span>
+        </div>
+        <div class="dev-grid">
+            <div class="dev-card">
+                <div class="dev-icon"><i class="fas fa-crown"></i></div>
+                <h4>Poncho435</h4>
+                <p>Founder and lead developer. Building everything from scratch.</p>
+            </div>
+            <div class="dev-card">
+                <div class="dev-icon dev-icon-2"><i class="fas fa-plus-circle"></i></div>
+                <h4>Team is Growing</h4>
+                <p>5+ new members will be joining the project soon.</p>
+            </div>
+            <div class="dev-card">
+                <div class="dev-icon dev-icon-3"><i class="fas fa-code-branch"></i></div>
+                <h4>Open Source</h4>
+                <p>Some projects will be open for the community.</p>
+            </div>
+            <div class="dev-card">
+                <div class="dev-icon dev-icon-4"><i class="fas fa-heart"></i></div>
+                <h4>Made with Love</h4>
+                <p>Every detail is crafted with care for the players.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="../assets/logo.png" class="footer-logo" alt=""> ARESCRAFTX
+                </div>
+                <p class="footer-about">Next-generation Minecraft ecosystem. Server, launcher, anti-cheat and communication platform.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="server.html"><i class="fas fa-server"></i> Server</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+            </div>
+            <div class="footer-col">
+                <h4>Projects</h4>
+                <a href="../projects/checkers/index.html"><i class="fas fa-shield-alt"></i> AresChecker</a>
+                <a href="../projects/launchers/index.html"><i class="fas fa-rocket"></i> AresLaunch</a>
+                <a href="../projects/aresgram/index.html"><i class="fas fa-comments"></i> AresGram</a>
+            </div>
+            <div class="footer-col">
+                <h4>Account</h4>
+                <a href="#" id="footer-profile-btn"><i class="fas fa-user"></i> <span id="footer-username">Profile</span></a>
+                <a href="#" id="footer-settings-btn"><i class="fas fa-cog"></i> Settings</a>
+                <a href="../auth/auth.html" id="footer-logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021–2026 AresCraftX. All rights reserved.</p>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div class="footer-socials">
+                    <a href="https://discord.gg/JqzG7THVZ5" class="footer-social" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://t.me/arescraftx" class="footer-social" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.youtube.com/@AresCraftX" class="footer-social" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div style="display:flex;gap:8px;font-size:.72rem;color:var(--text-3);">
+                    <a href="privacy.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Privacy</a>
+                    <span>·</span>
+                    <a href="cookies.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Cookies</a>
+                    <span>·</span>
+                    <a href="terms.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Terms</a>
+                    <span>·</span>
+                    <a href="disclaimer.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profile-modal">
+    <div class="modal-content modal-lg">
+        <div id="profile-view-mode">
+            <div class="profile-view-header">
+                <button class="btn-icon-only" id="profile-edit-toggle" title="Edit"><i class="fas fa-pen"></i></button>
+                <div class="profile-view-avatar-row">
+                    <img src="" id="view-avatar" class="profile-view-avatar" alt="">
+                    <div class="profile-view-main">
+                        <h2 id="view-username" class="profile-view-name">Player</h2>
+                        <span id="view-status-dot" class="profile-view-status-dot"></span>
+                        <span id="view-status-text" class="profile-view-status-text">Online</span>
+                    </div>
+                </div>
+                <button class="modal-close" data-close="profile-modal">×</button>
+            </div>
+            <div class="profile-view-body">
+                <div id="view-description" class="profile-view-desc">No description</div>
+                <div class="profile-view-stats">
+                    <div class="pv-stat"><i class="fas fa-envelope"></i><span id="view-email">—</span></div>
+                    <div class="pv-stat"><i class="fas fa-calendar"></i><span id="view-birthday">Not specified</span></div>
+                    <div class="pv-stat"><i class="fas fa-venus-mars"></i><span id="view-gender">Not specified</span></div>
+                    <div class="pv-stat"><i class="fas fa-gamepad"></i><span id="view-mc-nick">Not specified</span></div>
+                    <div class="pv-stat"><i class="fas fa-flag"></i><span id="view-mc-mode">Not selected</span></div>
+                    <div class="pv-stat"><i class="fas fa-shield-alt"></i><span id="view-2fa">Disabled</span></div>
+                    <div class="pv-stat"><i class="fas fa-clock"></i><span id="view-last-login">—</span></div>
+                    <div class="pv-stat"><i class="fas fa-calendar-check"></i><span id="view-joined">—</span></div>
+                </div>
+                <div class="profile-view-links-section">
+                    <h4><i class="fas fa-link"></i> Links</h4>
+                    <div id="view-links" class="profile-view-links"></div>
+                </div>
+            </div>
+        </div>
+        <div id="profile-edit-mode" style="display:none">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-edit"></i> Edit Profile</h2>
+                <button class="modal-close" data-close="profile-modal">×</button>
+            </div>
+            <div class="profile-edit-avatar-section">
+                <div class="profile-edit-avatar-wrap">
+                    <img src="" id="edit-avatar-preview" class="profile-edit-avatar" alt="">
+                    <label class="avatar-upload-overlay" for="edit-avatar-input"><i class="fas fa-camera"></i></label>
+                    <input type="file" id="edit-avatar-input" accept="image/*" style="display:none">
+                </div>
+            </div>
+            <div class="form-grid">
+                <div class="form-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="edit-username" maxlength="30" placeholder="Username"></div>
+                <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="edit-email" disabled></div>
+                <div class="form-group"><label><i class="fas fa-calendar"></i> Birthday</label><input type="date" id="edit-birthday"></div>
+                <div class="form-group"><label><i class="fas fa-venus-mars"></i> Gender</label><select id="edit-gender"><option value="not_specified">Not specified</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+                <div class="form-group"><label><i class="fas fa-gamepad"></i> MC Nick</label><input type="text" id="edit-mc-nick" maxlength="16" placeholder="Your Minecraft nickname"></div>
+                <div class="form-group"><label><i class="fas fa-flag"></i> Mode</label><select id="edit-mc-mode"><option value="">Not selected</option><option value="anarchy">Anarchy</option><option value="vanilla">Vanilla+</option></select></div>
+            </div>
+            <div class="form-group form-group-full"><label><i class="fas fa-pen"></i> About</label><textarea id="edit-description" maxlength="200" rows="3" placeholder="Tell us about yourself..."></textarea><span class="char-count" id="desc-char-count">0</span></div>
+            <div class="profile-links-editor">
+                <h4><i class="fas fa-link"></i> Links <span class="profile-links-count" id="links-count">(0/5)</span></h4>
+                <div id="links-editor-list"></div>
+                <button class="btn-secondary btn-sm" id="add-link-btn" style="margin-top:8px"><i class="fas fa-plus"></i> Add link</button>
+                <div id="add-link-dropdown" class="add-link-dropdown" style="display:none">
+                    <div class="add-link-preset" data-link-type="telegram"><i class="fab fa-telegram"></i> Telegram</div>
+                    <div class="add-link-preset" data-link-type="youtube"><i class="fab fa-youtube"></i> YouTube</div>
+                    <div class="add-link-preset" data-link-type="discord"><i class="fab fa-discord"></i> Discord</div>
+                    <div class="add-link-preset" data-link-type="vk"><i class="fab fa-vk"></i> VK</div>
+                    <div class="add-link-preset" data-link-type="twitter"><i class="fab fa-x-twitter"></i> Twitter/X</div>
+                    <div class="add-link-preset" data-link-type="website"><i class="fas fa-globe"></i> Website</div>
+                    <div class="add-link-divider"></div>
+                    <div class="add-link-preset" data-link-type="custom"><i class="fas fa-plus-circle"></i> Custom link</div>
+                </div>
+            </div>
+            <div class="modal-status" id="profile-status"></div>
+            <div class="modal-buttons"><button class="btn-primary" id="save-profile-btn"><i class="fas fa-save"></i> Save</button><button class="btn-secondary" id="cancel-edit-btn">Cancel</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+    <div class="modal-content modal-xl">
+        <div class="modal-header">
+            <h2><i class="fas fa-cog"></i> Settings</h2>
+            <button class="modal-close" data-close="settings-modal">×</button>
+        </div>
+        <div class="settings-layout">
+            <div class="settings-nav">
+                <button class="settings-nav-item active" data-settings-tab="account"><i class="fas fa-user"></i> Account</button>
+                <button class="settings-nav-item" data-settings-tab="mc"><i class="fas fa-gamepad"></i> Minecraft</button>
+                <button class="settings-nav-item" data-settings-tab="appearance"><i class="fas fa-palette"></i> Appearance</button>
+                <button class="settings-nav-item" data-settings-tab="security"><i class="fas fa-shield-alt"></i> Security</button>
+                <button class="settings-nav-item" data-settings-tab="notifications"><i class="fas fa-bell"></i> Notifications</button>
+                <button class="settings-nav-item settings-nav-item-danger" data-settings-tab="danger"><i class="fas fa-exclamation-triangle"></i> Danger Zone</button>
+            </div>
+            <div class="settings-content">
+                <div class="settings-tab active" id="tab-account">
+                    <h3>Account</h3>
+                    <p class="settings-desc">Basic profile information</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-id-card"></i> Account Details</h4>
+                        <div class="form-group"><label><i class="fas fa-user"></i> Username</label><input type="text" id="s-username"></div>
+                        <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="s-email" disabled></div>
+                        <div class="form-group"><label><i class="fas fa-calendar"></i> Birthday</label><input type="date" id="s-birthday"></div>
+                        <div class="form-group"><label><i class="fas fa-venus-mars"></i> Gender</label><select id="s-gender"><option value="not_specified">Not specified</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option></select></div>
+                        <div class="form-group"><label><i class="fas fa-pen"></i> About</label><textarea id="s-description" rows="2"></textarea></div>
+                        <h4 style="margin-top:16px;font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle" style="color:var(--green);font-size:.5rem;"></i> Status</h4>
+                        <div class="status-select">
+                            <div class="status-option" data-status="online" onclick="setStatus('online',this)"><span class="status-dot status-dot-online"></span> Online</div>
+                            <div class="status-option" data-status="dnd" onclick="setStatus('dnd',this)"><span class="status-dot status-dot-dnd"></span> Do Not Disturb</div>
+                            <div class="status-option" data-status="offline" onclick="setStatus('offline',this)"><span class="status-dot status-dot-offline"></span> Offline</div>
+                        </div>
+                        <div class="modal-status" id="account-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="save-account-btn"><i class="fas fa-save"></i> Save</button></div>
+                    </div>
+                </div>
+                <div class="settings-tab" id="tab-mc">
+                    <h3>Minecraft</h3>
+                    <p class="settings-desc">Game profile settings</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-gamepad"></i> Game Profile</h4>
+                        <div class="form-group"><label><i class="fas fa-user"></i> MC Nick</label><input type="text" id="s-mc-nick" maxlength="16" placeholder="Your Minecraft nickname"></div>
+                        <div class="form-group"><label><i class="fas fa-flag"></i> Preferred Mode</label><select id="s-mc-mode"><option value="">Not selected</option><option value="anarchy">Anarchy</option><option value="vanilla">Vanilla+</option></select></div>
+                        <div class="modal-status" id="mc-settings-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="save-mc-btn"><i class="fas fa-save"></i> Save</button></div>
+                    </div>
+                </div>
+                <div class="settings-tab" id="tab-appearance">
+                    <h3>Appearance</h3>
+                    <p class="settings-desc">Customize theme and display</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-language"></i> Language</h4>
+                        <div class="settings-row"><span class="settings-row-label">Interface language</span><select id="settings-lang-select" style="padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text-1);font-size:.88rem;outline:none;cursor:pointer"><option value="ru">🇷🇺 Русский</option><option value="en" selected>🇬🇧 English</option></select></div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-palette"></i> Theme</h4>
+                        <div class="theme-cards">
+                            <div class="theme-card" data-theme-val="dark"><div class="theme-card-preview theme-preview-dark">🌙</div>Dark</div>
+                            <div class="theme-card" data-theme-val="light"><div class="theme-card-preview theme-preview-light">☀️</div>Light</div>
+                            <div class="theme-card" data-theme-val="crimson"><div class="theme-card-preview theme-preview-crimson">🔴</div>Crimson</div>
+                            <div class="theme-card" data-theme-val="emerald"><div class="theme-card-preview theme-preview-emerald">💚</div>Emerald</div>
+                            <div class="theme-card" data-theme-val="ocean"><div class="theme-card-preview theme-preview-ocean">🌊</div>Ocean</div>
+                            <div class="theme-card" data-theme-val="royal"><div class="theme-card-preview theme-preview-royal">👑</div>Royal</div>
+                            <div class="theme-card" data-theme-val="cyber"><div class="theme-card-preview theme-preview-cyber">⚡</div>Cyber</div>
+                            <div class="theme-card" data-theme-val="midnight"><div class="theme-card-preview theme-preview-midnight">🌌</div>Midnight</div>
+                            <div class="theme-card" data-theme-val="sunset"><div class="theme-card-preview theme-preview-sunset">🌅</div>Sunset</div>
+                            <div class="theme-card" data-theme-val="lavender"><div class="theme-card-preview theme-preview-lavender">💜</div>Lavender</div>
+                            <div class="theme-card" data-theme-val="mono"><div class="theme-card-preview theme-preview-mono">⬜</div>Mono</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-tab" id="tab-security">
+                    <h3>Security</h3>
+                    <p class="settings-desc">Password, 2FA and sessions</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-key"></i> Change Password</h4>
+                        <div class="form-group"><label><i class="fas fa-lock"></i> New Password</label><div class="password-wrap"><input type="password" id="s-new-password" placeholder="Minimum 8 characters"><button type="button" class="password-toggle" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';this.innerHTML=i.type==='password'?'<i class=\'fas fa-eye\'></i>':'<i class=\'fas fa-eye-slash\'></i>'"><i class="fas fa-eye"></i></button></div></div>
+                        <div class="form-group"><label><i class="fas fa-check-circle"></i> Confirm Password</label><div class="password-wrap"><input type="password" id="s-confirm-password" placeholder="Repeat password"><button type="button" class="password-toggle" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';this.innerHTML=i.type==='password'?'<i class=\'fas fa-eye\'></i>':'<i class=\'fas fa-eye-slash\'></i>'"><i class="fas fa-eye"></i></button></div></div>
+                        <div class="modal-status" id="password-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="btn-save-password"><i class="fas fa-save"></i> Change Password</button></div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-shield-alt"></i> Two-Factor Authentication</h4>
+                        <div id="mfa-status"></div>
+                        <div id="mfa-setup-area" style="display:none;">
+                            <div id="qr-code-container" style="text-align:center;"></div>
+                            <p style="text-align:center;color:var(--text-2);font-size:.85rem;margin:12px 0;">Enter the 6-digit code from the app:</p>
+                            <div class="code-inputs" id="mfa-code-inputs"><input type="text" maxlength="1" class="code-box"><input type="text" maxlength="1" class="code-box"><input type="text" maxlength="1" class="code-box"><input type="text" maxlength="1" class="code-box"><input type="text" maxlength="1" class="code-box"><input type="text" maxlength="1" class="code-box"></div>
+                            <div class="modal-buttons" style="justify-content:center;"><button class="btn-primary" id="mfa-verify-btn"><i class="fas fa-check"></i> Confirm</button><button class="btn-secondary" id="mfa-cancel-setup">Cancel</button></div>
+                        </div>
+                        <div id="mfa-enabled-area" style="display:none;">
+                            <p style="color:var(--green);font-size:.85rem;margin-bottom:8px;"><i class="fas fa-check-circle"></i> 2FA is enabled — your account is protected</p>
+                            <button class="btn-danger" id="mfa-disable-btn"><i class="fas fa-times"></i> Disable 2FA</button>
+                        </div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-history"></i> Security Log</h4>
+                        <p style="font-size:.82rem;color:var(--text-2);margin-bottom:12px;">Recent actions on your account</p>
+                        <div id="audit-log" style="max-height:200px;overflow-y:auto;"></div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-desktop"></i> Active Sessions</h4>
+                        <div class="session-info">
+                            <div class="session-row"><i class="fas fa-user"></i> <strong id="s-username-display">—</strong></div>
+                            <div class="session-row"><i class="fas fa-clock"></i> Last login: <strong id="s-last-login">—</strong></div>
+                            <div class="session-row"><i class="fas fa-laptop"></i> Device: <strong id="s-device">—</strong></div>
+                        </div>
+                        <div class="session-list" id="session-list"></div>
+                    </div>
+                </div>
+                <div class="settings-tab" id="tab-notifications">
+                    <h3>Notifications</h3>
+                    <p class="settings-desc">Manage alerts</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-bell"></i> Alerts</h4>
+                        <div class="settings-row"><span class="settings-row-label">Email notifications</span><label class="toggle-switch"><input type="checkbox" id="notif-email"><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Login notification</span><label class="toggle-switch"><input type="checkbox" id="notif-login" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">News</span><label class="toggle-switch"><input type="checkbox" id="notif-news" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Events</span><label class="toggle-switch"><input type="checkbox" id="notif-events" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">MC Chat</span><label class="toggle-switch"><input type="checkbox" id="notif-mc-chat" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">PVP notifications</span><label class="toggle-switch"><input type="checkbox" id="notif-pvp" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Private messages</span><label class="toggle-switch"><input type="checkbox" id="notif-pm" checked><span class="toggle-slider"></span></label>
+                        <div class="settings-row"><span class="settings-row-label">Push notifications</span><label class="toggle-switch"><input type="checkbox" id="push-toggle"><span class="toggle-slider"></span></label></div>
+                        <div class="modal-status" id="notif-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="save-notif-btn"><i class="fas fa-save"></i> Save</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-tab" id="tab-danger">
+                    <h3>Danger Zone</h3>
+                    <p class="settings-desc">Irreversible actions</p>
+                    <div class="settings-section-inner settings-section-danger">
+                        <h4><i class="fas fa-sign-out-alt"></i> Log Out</h4>
+                        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:12px;">Terminate all sessions and log out</p>
+                        <button class="btn-danger" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ADMIN MODALS -->
+<div class="modal-overlay" id="admin-broadcast-modal">
+    <div class="modal-content">
+        <div class="modal-header"><h2><i class="fas fa-envelope"></i> Email Broadcast</h2><button class="modal-close" data-close="admin-broadcast-modal">×</button></div>
+        <div class="form-group"><label><i class="fas fa-heading"></i> Subject</label><input type="text" id="admin-broadcast-subject" placeholder="Email subject"></div>
+        <div class="form-group"><label><i class="fas fa-pen"></i> Message</label><textarea id="admin-broadcast-message" rows="5" placeholder="Broadcast text..."></textarea></div>
+        <div class="modal-status" id="admin-broadcast-status"></div>
+        <div class="modal-buttons"><button class="btn-primary" id="admin-broadcast-send"><i class="fas fa-paper-plane"></i> Send to all</button><button class="btn-secondary" data-close="admin-broadcast-modal">Cancel</button></div>
+    </div>
+</div>
+<div class="modal-overlay" id="admin-push-modal">
+    <div class="modal-content">
+        <div class="modal-header"><h2><i class="fas fa-bell"></i> Push for All</h2><button class="modal-close" data-close="admin-push-modal">×</button></div>
+        <div class="form-group"><label><i class="fas fa-heading"></i> Title</label><input type="text" id="admin-push-title" placeholder="Notification title"></div>
+        <div class="form-group"><label><i class="fas fa-pen"></i> Message</label><textarea id="admin-push-message" rows="3" placeholder="Notification text..."></textarea></div>
+        <div class="modal-status" id="admin-push-status"></div>
+        <div class="modal-buttons"><button class="btn-primary" id="admin-push-send"><i class="fas fa-paper-plane"></i> Send</button><button class="btn-secondary" data-close="admin-push-modal">Cancel</button></div>
+    </div>
+</div>
+<div class="modal-overlay" id="admin-news-modal">
+    <div class="modal-content">
+        <div class="modal-header"><h2><i class="fas fa-newspaper"></i> New Post</h2><button class="modal-close" data-close="admin-news-modal">×</button></div>
+        <div class="form-group"><label><i class="fas fa-heading"></i> Title</label><input type="text" id="admin-news-title" placeholder="Post title"></div>
+        <div class="form-group"><label><i class="fas fa-pen"></i> Content</label><textarea id="admin-news-content" rows="5" placeholder="Post content..."></textarea></div>
+        <div class="form-group"><label><i class="fas fa-tag"></i> Category</label><select id="admin-news-category"><option value="system">System</option><option value="news">News</option><option value="event">Event</option></select></div>
+        <div class="modal-status" id="admin-news-status"></div>
+        <div class="modal-buttons"><button class="btn-primary" id="admin-news-send"><i class="fas fa-paper-plane"></i> Publish</button><button class="btn-secondary" data-close="admin-news-modal">Cancel</button></div>
+    </div>
+</div>
+<div class="modal-overlay" id="admin-ban-modal">
+    <div class="modal-content">
+        <div class="modal-header"><h2><i class="fas fa-ban"></i> Ban User</h2><button class="modal-close" data-close="admin-ban-modal">×</button></div>
+        <div class="form-group"><label><i class="fas fa-user"></i> ID or Nick</label><input type="text" id="admin-ban-userid" placeholder="UUID or username"></div>
+        <div class="form-group"><label><i class="fas fa-pen"></i> Reason</label><textarea id="admin-ban-reason" rows="2" placeholder="Ban reason..."></textarea></div>
+        <div class="form-group"><label><i class="fas fa-clock"></i> Duration</label><select id="admin-ban-duration"><option value="1h">1 hour</option><option value="1d">1 day</option><option value="7d">7 days</option><option value="30d">30 days</option><option value="permanent">Permanent</option></select></div>
+        <div class="modal-status" id="admin-ban-status"></div>
+        <div class="modal-buttons"><button class="btn-danger" id="admin-ban-send"><i class="fas fa-ban"></i> Ban</button><button class="btn-secondary" data-close="admin-ban-modal">Cancel</button></div>
+    </div>
+</div>
+
+<!-- TOASTS -->
+<button id="scroll-top" title="Back to top"><i class="fas fa-chevron-up"></i></button>
+<div id="toast-container"></div>
+
+<!-- FRIENDS MODAL -->
+<div class="modal-overlay" id="friends-modal">
+    <div class="modal-content friends-panel">
+        <div class="modal-header">
+            <h2><i class="fas fa-user-friends"></i> Friends <span id="friends-count" style="color:var(--text-3);font-size:.85rem;font-weight:400">(0)</span></h2>
+            <button class="modal-close" data-close="friends-modal">×</button>
+        </div>
+        <div class="friends-search"><input type="text" id="friend-search-input" placeholder="Search by nickname..." maxlength="30"></div>
+        <div id="friend-search-results" style="margin-bottom:12px"></div>
+        <div class="friends-tabs">
+            <button class="friends-tab active" data-friends-tab="friends">Friends</button>
+            <button class="friends-tab" data-friends-tab="incoming">Incoming <span id="incoming-count" style="color:var(--accent);font-size:.75rem"></span></button>
+            <button class="friends-tab" data-friends-tab="outgoing">Outgoing <span id="outgoing-count" style="color:var(--text-3);font-size:.75rem"></span></button>
+        </div>
+        <div id="friends-list-section" data-friends-section="friends"><div id="friends-list"></div></div>
+        <div id="friend-requests-section" style="display:none" data-friends-section="incoming">
+            <div class="friends-section-title"><i class="fas fa-inbox"></i> Incoming Requests</div>
+            <div id="friend-requests-list"></div>
+        </div>
+        <div id="outgoing-requests-section" style="display:none" data-friends-section="outgoing">
+            <div class="friends-section-title"><i class="fas fa-paper-plane"></i> Outgoing Requests</div>
+            <div id="outgoing-requests-list"></div>
+        </div>
+    </div>
+</div>
+
+<!-- COOKIE CONSENT -->
+<div class="cookie-consent" id="cookie-consent">
+    <p>🍪 We use cookies for authentication and saving preferences. By continuing to use the site, you agree to the <a href="cookies.html">cookie policy</a>.</p>
+    <button class="cookie-accept" id="cookie-accept">Accept</button>
+    <button class="cookie-decline" id="cookie-decline">Essential only</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="security.js?v=11"></script>
+<script src="mod/i.js?v=11"></script>
+<script>
+    document.querySelectorAll('.friends-tab[data-friends-tab]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.friends-tab[data-friends-tab]').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab=btn.dataset.friendsTab;
+        document.querySelectorAll('[data-friends-section]').forEach(s=>s.style.display='none');
+        const sec=document.querySelector('[data-friends-section="'+tab+'"]');
+        if(sec)sec.style.display='block';
+      });
+    });
+    document.getElementById('footer-profile-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('profile-btn')?.click()});
+    document.getElementById('footer-settings-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('settings-btn')?.click()});
+    document.getElementById('footer-logout-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('logout-btn')?.click()});
+    const fbu=document.getElementById('footer-username');
+    if(fbu){const un=document.getElementById('user-name');if(un)fbu.textContent=un.textContent||'Profile';new MutationObserver(()=>fbu.textContent=un.textContent).observe(un,{childList:true})}
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{})}</script>
+<script>
+(function(){const c=document.getElementById('cookie-consent');if(!c)return;if(!localStorage.getItem('acx_cookie_consent')){c.classList.add('visible')}document.getElementById('cookie-accept')?.addEventListener('click',()=>{localStorage.setItem('acx_cookie_consent','all');c.classList.remove('visible')});document.getElementById('cookie-decline')?.addEventListener('click',()=>{localStorage.setItem('acx_cookie_consent','necessary');c.classList.remove('visible')})})();
+</script>
+</body>
+</html>

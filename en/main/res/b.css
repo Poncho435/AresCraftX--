@@ -1,0 +1,12 @@
+/* b */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(130px);will-change:transform}
+.bg-orb-1{width:650px;height:650px;background:radial-gradient(circle,rgba(255,136,0,.1),transparent 70%);top:-220px;right:-120px;animation:o1 28s ease-in-out infinite}
+.bg-orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(255,60,0,.06),transparent 70%);bottom:-200px;left:-100px;animation:o2 32s ease-in-out infinite}
+.bg-orb-3{width:350px;height:350px;background:radial-gradient(circle,rgba(255,180,80,.05),transparent 70%);top:45%;left:35%;animation:o3 22s ease-in-out infinite}
+@keyframes o1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-50px,40px) scale(1.08)}66%{transform:translate(30px,-25px) scale(.95)}}
+@keyframes o2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-35px,20px) scale(1.1)}}
+@keyframes o3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(35px,-35px) scale(1.12)}}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,140,0,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,140,0,.012) 1px,transparent 1px);background-size:60px 60px}
+.bg-particles .particle{position:absolute;border-radius:50%;background:var(--accent);animation:pF linear infinite}
+@keyframes pF{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:.5}90%{opacity:.5}100%{transform:translateY(-220px) scale(.2);opacity:0}}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница не найдена</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{min-height:100vh;background:#06050a;color:#ece4d8;font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;overflow:hidden}
+        .bg-orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none}
+        .bg-orb-1{width:400px;height:400px;background:radial-gradient(circle,rgba(255,136,0,.08),transparent 70%);top:-150px;right:-100px;position:fixed}
+        .bg-orb-2{width:300px;height:300px;background:radial-gradient(circle,rgba(255,60,0,.05),transparent 70%);bottom:-100px;left:-80px;position:fixed}
+        .container{position:relative;z-index:1;max-width:500px}
+        .code{font-size:8rem;font-weight:900;background:linear-gradient(135deg,#ff8800,#ff4400);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;animation:float 3s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        h1{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+        p{color:#9a8a78;font-size:.92rem;line-height:1.6;margin-bottom:28px}
+        .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+        .btn-primary{padding:12px 28px;background:linear-gradient(135deg,#ff8800,#e06500);border:none;border-radius:12px;color:#0a0808;font-size:.95rem;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,136,0,.2)}
+        .btn-secondary{padding:12px 28px;background:rgba(255,136,0,.08);border:1px solid rgba(255,140,0,.15);border-radius:12px;color:#ff8800;font-size:.95rem;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+        .btn-secondary:hover{background:rgba(255,136,0,.15);transform:translateY(-2px)}
+        .particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+        .particle{position:absolute;border-radius:50%;background:#ff8800;animation:pF linear infinite}
+        @keyframes pF{0%{transform:translateY(0) scale(1);opacity:0}10%{opacity:.4}90%{opacity:.4}100%{transform:translateY(-200px) scale(.2);opacity:0}}
+    </style>
+</head>
+<body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <div class="code">404</div>
+        <h1>Страница не найдена</h1>
+        <p>Кажется, вы забрели куда-то не туда. Эта страница не существует или была перемещена.</p>
+        <div class="btns">
+            <a href="index.html" class="btn-primary">🏠 На главную</a>
+            <a href="server.html" class="btn-secondary">🎮 К серверу</a>
+        </div>
+    </div>
+    <script>
+        const pc=document.getElementById('particles');
+        for(let i=0;i<15;i++){const p=document.createElement('div');p.className='particle';const s=Math.random()*2+1;p.style.width=s+'px';p.style.height=s+'px';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';p.style.animationDuration=(Math.random()*18+16)+'s';p.style.animationDelay=(Math.random()*10)+'s';pc.appendChild(p)}
+    </script>
+</body>
+</html>

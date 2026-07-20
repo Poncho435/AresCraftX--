@@ -1,0 +1,130 @@
+/* v.css — Variables + Themes + Reset */
+:root{
+/* ===== ТЁМНАЯ (по умолчанию) ===== */
+--bg:#06050a;--bg-nav:rgba(10,8,16,.82);--bg-card:rgba(16,12,22,.65);--bg-card-hover:rgba(22,16,30,.8);--bg-input:rgba(22,18,28,.9);
+--border:rgba(255,140,0,.07);--border-hover:rgba(255,140,0,.2);
+--text-1:#ece4d8;--text-2:#9a8a78;--text-3:#5a4a38;
+--accent:#ff8800;--accent-soft:rgba(255,136,0,.1);--accent-glow:rgba(255,136,0,.2);
+--green:#44dd66;--green-soft:rgba(68,221,102,.1);--red:#ff5050;--red-soft:rgba(255,80,80,.1);
+--blue:#50a0ff;--blue-soft:rgba(80,160,255,.1);--purple:#a070ff;--purple-soft:rgba(160,112,255,.1);
+--pink:#ff70b0;--pink-soft:rgba(255,112,176,.1);--cyan:#40d8e0;--cyan-soft:rgba(64,216,224,.1);--gold:#ffcc44;--gold-soft:rgba(255,204,68,.1);
+--radius-s:10px;--radius-m:16px;--radius-l:24px;--radius-xl:32px
+}
+
+/* ===== СВЕТЛАЯ — кремовый фон ===== */
+[data-theme="light"]{
+--bg:#f5f5f0;--bg-nav:rgba(245,245,240,.94);--bg-card:rgba(255,255,255,.85);--bg-card-hover:rgba(255,255,255,.95);--bg-input:rgba(240,238,232,.95);
+--border:rgba(180,160,120,.12);--border-hover:rgba(255,136,0,.3);
+--text-1:#1a1a1a;--text-2:#555050;--text-3:#9a9090;
+--accent:#e07000;--accent-soft:rgba(224,112,0,.08);--accent-glow:rgba(224,112,0,.15);
+--green:#22884a;--green-soft:rgba(34,136,74,.08);--red:#cc2233;--red-soft:rgba(204,34,51,.08);
+--blue:#2266cc;--blue-soft:rgba(34,102,204,.08);--purple:#7744bb;--purple-soft:rgba(119,68,187,.08);
+--pink:#cc4488;--pink-soft:rgba(204,68,136,.08);--cyan:#2299aa;--cyan-soft:rgba(34,153,170,.08);--gold:#aa8822;--gold-soft:rgba(170,136,34,.08)
+}
+
+/* ===== АЛЫЙ — кроваво-красный на чёрном ===== */
+[data-theme="crimson"]{
+--bg:#0a0204;--bg-nav:rgba(16,4,8,.88);--bg-card:rgba(28,8,12,.75);--bg-card-hover:rgba(38,12,18,.88);--bg-input:rgba(28,8,14,.92);
+--border:rgba(220,40,60,.1);--border-hover:rgba(220,40,60,.28);
+--text-1:#f8d0d8;--text-2:#c06070;--text-3:#6a2838;
+--accent:#e81030;--accent-soft:rgba(232,16,48,.12);--accent-glow:rgba(232,16,48,.25);
+--green:#44dd66;--green-soft:rgba(68,221,102,.1);--red:#ff2040;--red-soft:rgba(255,32,64,.12);
+--blue:#6090ff;--blue-soft:rgba(96,144,255,.1);--purple:#c070a0;--purple-soft:rgba(192,112,160,.1);
+--pink:#ff5080;--pink-soft:rgba(255,80,128,.1);--cyan:#40c8d0;--cyan-soft:rgba(64,200,208,.1);--gold:#ffa844;--gold-soft:rgba(255,168,68,.1)
+}
+
+/* ===== ИЗУМРУД — тёмно-зелёный лес ===== */
+[data-theme="emerald"]{
+--bg:#020c06;--bg-nav:rgba(4,16,8,.88);--bg-card:rgba(8,24,12,.75);--bg-card-hover:rgba(12,32,16,.88);--bg-input:rgba(8,24,14,.92);
+--border:rgba(34,197,94,.1);--border-hover:rgba(34,197,94,.28);
+--text-1:#c8f0d0;--text-2:#60a870;--text-3:#2a5838;
+--accent:#10c050;--accent-soft:rgba(16,192,80,.1);--accent-glow:rgba(16,192,80,.22);
+--green:#30ff70;--green-soft:rgba(48,255,112,.1);--red:#ff5050;--red-soft:rgba(255,80,80,.1);
+--blue:#50a0ff;--blue-soft:rgba(80,160,255,.1);--purple:#8070c0;--purple-soft:rgba(128,112,192,.1);
+--pink:#ff70b0;--pink-soft:rgba(255,112,176,.1);--cyan:#30d8a0;--cyan-soft:rgba(48,216,160,.1);--gold:#c8b840;--gold-soft:rgba(200,184,64,.1)
+}
+
+/* ===== ОКЕАН — глубокий синий ===== */
+[data-theme="ocean"]{
+--bg:#020810;--bg-nav:rgba(4,10,24,.88);--bg-card:rgba(8,16,36,.75);--bg-card-hover:rgba(12,20,44,.88);--bg-input:rgba(8,16,36,.92);
+--border:rgba(40,120,255,.1);--border-hover:rgba(40,120,255,.28);
+--text-1:#c8d8f8;--text-2:#5888b8;--text-3:#284060;
+--accent:#1870e0;--accent-soft:rgba(24,112,224,.1);--accent-glow:rgba(24,112,224,.22);
+--green:#44dd66;--green-soft:rgba(68,221,102,.1);--red:#ff5050;--red-soft:rgba(255,80,80,.1);
+--blue:#40a0ff;--blue-soft:rgba(64,160,255,.12);--purple:#7060d0;--purple-soft:rgba(112,96,208,.1);
+--pink:#ff70b0;--pink-soft:rgba(255,112,176,.1);--cyan:#30c0d8;--cyan-soft:rgba(48,192,216,.1);--gold:#c8a040;--gold-soft:rgba(200,160,64,.1)
+}
+
+/* ===== КОРОЛЕВСКАЯ — насыщенный фиолет ===== */
+[data-theme="royal"]{
+--bg:#08020e;--bg-nav:rgba(14,4,22,.88);--bg-card:rgba(22,8,36,.75);--bg-card-hover:rgba(30,12,46,.88);--bg-input:rgba(22,8,36,.92);
+--border:rgba(140,80,255,.1);--border-hover:rgba(140,80,255,.28);
+--text-1:#e0c8f8;--text-2:#8860b8;--text-3:#482868;
+--accent:#8040e0;--accent-soft:rgba(128,64,224,.1);--accent-glow:rgba(128,64,224,.22);
+--green:#44dd66;--green-soft:rgba(68,221,102,.1);--red:#ff5050;--red-soft:rgba(255,80,80,.1);
+--blue:#50a0ff;--blue-soft:rgba(80,160,255,.1);--purple:#a070ff;--purple-soft:rgba(160,112,255,.12);
+--pink:#ff70b0;--pink-soft:rgba(255,112,176,.1);--cyan:#40d8e0;--cyan-soft:rgba(64,216,224,.1);--gold:#c8a040;--gold-soft:rgba(200,160,64,.1)
+}
+
+/* ===== КИБЕР — неоновый зелёный на матричном чёрном ===== */
+[data-theme="cyber"]{
+--bg:#010204;--bg-nav:rgba(2,4,8,.9);--bg-card:rgba(4,10,16,.8);--bg-card-hover:rgba(6,14,22,.9);--bg-input:rgba(4,10,16,.94);
+--border:rgba(0,255,200,.06);--border-hover:rgba(0,255,200,.25);
+--text-1:#c0ffe0;--text-2:#40a870;--text-3:#184830;
+--accent:#00ffaa;--accent-soft:rgba(0,255,170,.06);--accent-glow:rgba(0,255,170,.18);
+--green:#00ffaa;--green-soft:rgba(0,255,170,.08);--red:#ff2060;--red-soft:rgba(255,32,96,.08);
+--blue:#00c0ff;--blue-soft:rgba(0,192,255,.08);--purple:#c040ff;--purple-soft:rgba(192,64,255,.08);
+--pink:#ff40a0;--pink-soft:rgba(255,64,160,.08);--cyan:#00ffcc;--cyan-soft:rgba(0,255,204,.08);--gold:#ffe040;--gold-soft:rgba(255,224,64,.08)
+}
+
+/* ===== ПОЛНОЧЬ — индиго-синий ночной ===== */
+[data-theme="midnight"]{
+--bg:#06061a;--bg-nav:rgba(10,10,32,.9);--bg-card:rgba(14,14,42,.8);--bg-card-hover:rgba(20,20,54,.9);--bg-input:rgba(14,14,42,.94);
+--border:rgba(100,120,255,.08);--border-hover:rgba(100,120,255,.25);
+--text-1:#b8c4ff;--text-2:#5868a0;--text-3:#283058;
+--accent:#5070ff;--accent-soft:rgba(80,112,255,.08);--accent-glow:rgba(80,112,255,.2);
+--green:#44dd66;--green-soft:rgba(68,221,102,.08);--red:#ff5050;--red-soft:rgba(255,80,80,.08);
+--blue:#6888ff;--blue-soft:rgba(104,136,255,.1);--purple:#8870e0;--purple-soft:rgba(136,112,224,.08);
+--pink:#ff70b0;--pink-soft:rgba(255,112,176,.08);--cyan:#4098d0;--cyan-soft:rgba(64,152,208,.08);--gold:#b8a040;--gold-soft:rgba(184,160,64,.08)
+}
+
+/* ===== ЗАКАТ — тёплый огненный ===== */
+[data-theme="sunset"]{
+--bg:#100602;--bg-nav:rgba(22,10,4,.88);--bg-card:rgba(36,18,10,.75);--bg-card-hover:rgba(46,24,14,.88);--bg-input:rgba(36,18,10,.92);
+--border:rgba(255,100,40,.1);--border-hover:rgba(255,100,40,.28);
+--text-1:#f8d8c0;--text-2:#b87850;--text-3:#604028;
+--accent:#ff5020;--accent-soft:rgba(255,80,32,.1);--accent-glow:rgba(255,80,32,.22);
+--green:#60cc40;--green-soft:rgba(96,204,64,.08);--red:#ff3030;--red-soft:rgba(255,48,48,.08);
+--blue:#5090ff;--blue-soft:rgba(80,144,255,.08);--purple:#b06070;--purple-soft:rgba(176,96,112,.08);
+--pink:#ff7878;--pink-soft:rgba(255,120,120,.08);--cyan:#40b0a8;--cyan-soft:rgba(64,176,168,.08);--gold:#ffc030;--gold-soft:rgba(255,192,48,.08)
+}
+
+/* ===== ЛАВАНДА — мягкий пастельный фиолет ===== */
+[data-theme="lavender"]{
+--bg:#0e0818;--bg-nav:rgba(18,12,30,.88);--bg-card:rgba(26,18,44,.75);--bg-card-hover:rgba(34,24,56,.88);--bg-input:rgba(26,18,44,.92);
+--border:rgba(180,140,255,.08);--border-hover:rgba(180,140,255,.25);
+--text-1:#e8d0ff;--text-2:#9880b8;--text-3:#584070;
+--accent:#a860ff;--accent-soft:rgba(168,96,255,.1);--accent-glow:rgba(168,96,255,.2);
+--green:#60dd80;--green-soft:rgba(96,221,128,.08);--red:#ff5070;--red-soft:rgba(255,80,112,.08);
+--blue:#7098ff;--blue-soft:rgba(112,152,255,.08);--purple:#c090ff;--purple-soft:rgba(192,144,255,.1);
+--pink:#ff80c0;--pink-soft:rgba(255,128,192,.08);--cyan:#50d0d0;--cyan-soft:rgba(80,208,208,.08);--gold:#d0b050;--gold-soft:rgba(208,176,80,.08)
+}
+
+/* ===== МОНОКОЛ — чёрно-белый с серым акцентом ===== */
+[data-theme="mono"]{
+--bg:#080808;--bg-nav:rgba(14,14,14,.88);--bg-card:rgba(20,20,20,.75);--bg-card-hover:rgba(28,28,28,.88);--bg-input:rgba(20,20,20,.92);
+--border:rgba(200,200,200,.06);--border-hover:rgba(200,200,200,.18);
+--text-1:#e8e8e8;--text-2:#808080;--text-3:#404040;
+--accent:#b0b0b0;--accent-soft:rgba(176,176,176,.06);--accent-glow:rgba(176,176,176,.12);
+--green:#80cc80;--green-soft:rgba(128,204,128,.06);--red:#cc6666;--red-soft:rgba(204,102,102,.06);
+--blue:#8888cc;--blue-soft:rgba(136,136,204,.06);--purple:#aa88cc;--purple-soft:rgba(170,136,204,.06);
+--pink:#cc88aa;--pink-soft:rgba(204,136,170,.06);--cyan:#88cccc;--cyan-soft:rgba(136,204,204,.06);--gold:#ccbb88;--gold-soft:rgba(204,187,136,.06)
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:var(--bg);color:var(--text-1);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;overflow-x:hidden;transition:background .4s,color .4s}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+img{display:block}

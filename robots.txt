@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /ru/main/
+Allow: /ru/projects/
+Disallow: /ru/auth/
+Disallow: /ru/config.json
+Disallow: /ru/database.sql
+Disallow: /ru/main/sw.js
+Disallow: /ru/main/offline.html
+Disallow: /ru/main/security.js
+Disallow: /ru/main/script.js
+Disallow: /ru/main/style.css
+Disallow: /en/
+
+Sitemap: https://arescraftx.online/sitemap.xml

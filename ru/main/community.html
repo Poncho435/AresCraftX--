@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AresCraftX — Сообщество</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../assets/logo.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="../assets/logo.png">
+    <link rel="mask-icon" href="../assets/logo.png" color="#ff8800">
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#ff8800">
+    <link rel="stylesheet" href="res/v.css"><link rel="stylesheet" href="res/b.css"><link rel="stylesheet" href="res/n.css"><link rel="stylesheet" href="res/l.css"><link rel="stylesheet" href="res/c.css"><link rel="stylesheet" href="res/p.css"><link rel="stylesheet" href="res/o.css"><link rel="stylesheet" href="res/r.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="Сообщество — AresCraftX">
+    <meta property="og:description" content="Discord, Telegram, контакты и FAQ — присоединяйся к AresCraftX">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arescraftx.online/ru/main/community.html">
+    <meta property="og:site_name" content="AresCraftX">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://arescraftx.online/ru/assets/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://arescraftx.online/ru/assets/logo.png">
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg-canvas">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-particles" id="particles"></div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="../assets/logo.png" class="nav-logo" alt="AresCraftX">
+            <span class="nav-title">ARESCRAFTX</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Главная</a>
+            <a href="server.html" class="nav-link"><i class="fas fa-server"></i> Сервер</a>
+            <a href="community.html" class="nav-link active"><i class="fas fa-users"></i> <span data-i18n="hero_btn_community">Сообщество</span></a>
+            <div class="nav-dropdown">
+                <a class="nav-link"><i class="fas fa-cube"></i> Проекты <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="../projects/checkers/index.html" class="dropdown-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div><span class="dropdown-item-title"><span data-i18n="proj_checker">AresChecker</span></span><span class="dropdown-item-desc"><span data-i18n="proj_checker_desc">Проверка на читы</span></span></div>
+                    </a>
+                    <a href="../projects/launchers/index.html" class="dropdown-item">
+                        <i class="fas fa-rocket"></i>
+                        <div><span class="dropdown-item-title"><span data-i18n="proj_launch">AresLaunch</span></span><span class="dropdown-item-desc"><span data-i18n="proj_launch_desc">Minecraft-лаунчер</span></span></div>
+                    </a>
+                    <a href="../projects/aresgram/index.html" class="dropdown-item">
+                        <i class="fas fa-comments"></i>
+                        <div><span class="dropdown-item-title"><span data-i18n="proj_gram">AresGram</span></span><span class="dropdown-item-desc"><span data-i18n="proj_gram_desc">Платформа для общения</span></span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="nav-actions">
+            <button class="nav-icon-btn" id="theme-switcher" title="Тема"><i class="fas fa-moon"></i></button>
+            <button class="nav-icon-btn nav-icon-badge" id="notif-btn" title="Уведомления"><i class="fas fa-bell"></i><span class="nav-badge" id="notif-badge" style="display:none">0</span></button>
+            <button class="nav-icon-btn nav-icon-badge" id="friends-btn" title="Друзья"><i class="fas fa-user-friends"></i><span class="nav-badge" id="friends-badge" style="display:none">0</span></button>
+            <button class="nav-icon-btn" id="settings-btn" title="Настройки"><i class="fas fa-cog"></i></button>
+            <div class="nav-dropdown admin-dropdown-wrap" id="admin-nav-dropdown" style="display:none">
+                <a class="nav-link nav-admin-link"><i class="fas fa-shield-alt"></i> Админ <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                <div class="nav-dropdown-menu nav-dropdown-admin">
+                    <a href="../admin/admin.html" class="dropdown-item"><i class="fas fa-tachometer-alt"></i><div><span class="dropdown-item-title">Панель</span><span class="dropdown-item-desc">Админ-панель</span></div></a>
+                    <a class="dropdown-item" id="admin-broadcast-link"><i class="fas fa-envelope"></i><div><span class="dropdown-item-title">Рассылка</span><span class="dropdown-item-desc">Email всем</span></div></a>
+                    <a class="dropdown-item" id="admin-push-all-link"><i class="fas fa-bell"></i><div><span class="dropdown-item-title">Push</span><span class="dropdown-item-desc">Уведомление всем</span></div></a>
+                    <a class="dropdown-item" id="admin-news-link"><i class="fas fa-newspaper"></i><div><span class="dropdown-item-title">Новости</span><span class="dropdown-item-desc">Управление</span></div></a>
+                    <a class="dropdown-item" id="admin-ban-link"><i class="fas fa-ban"></i><div><span class="dropdown-item-title">Бан</span><span class="dropdown-item-desc">Пользователи</span></div></a>
+                </div>
+            </div>
+            <div class="nav-user-btn" id="profile-btn">
+                <img src="" id="user-avatar" class="nav-avatar" alt="">
+                <span id="user-name" class="nav-username">Игрок</span><span class="nav-status-indicator" style="background:var(--green);box-shadow:0 0 8px rgba(68,221,102,.4)"></span>
+            </div>
+            <select id="lang-select" class="nav-lang-select" title="Language">
+                <option value="ru" selected>RU</option>
+                <option value="en">EN</option>
+            </select>
+            <button class="hamburger" id="hamburger-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    <div class="mobile-nav-brand"><img src="../assets/logo.png" style="width:28px;border-radius:6px"> <span style="font-weight:800;color:var(--accent)">ARESCRAFTX</span></div>
+    <a href="index.html" class="mobile-nav-link"><i class="fas fa-home"></i> Главная</a>
+    <a href="server.html" class="mobile-nav-link"><i class="fas fa-server"></i> Сервер</a>
+    <a href="community.html" class="mobile-nav-link active"><i class="fas fa-users"></i> Сообщество</a>
+    <div class="mobile-nav-separator"></div>
+    <div class="mobile-nav-subtitle">Проекты</div>
+    <a href="../projects/checkers/index.html" class="mobile-nav-link"><i class="fas fa-shield-alt"></i> AresChecker</a>
+    <a href="../projects/launchers/index.html" class="mobile-nav-link"><i class="fas fa-rocket"></i> AresLaunch</a>
+    <a href="../projects/aresgram/index.html" class="mobile-nav-link"><i class="fas fa-comments"></i> AresGram</a>
+    <div class="mobile-nav-separator"></div>
+    <a href="../admin/admin.html" class="mobile-nav-link admin-link" style="display:none;color:var(--red)"><i class="fas fa-shield-alt"></i> Админ-панель</a>
+    <a href="#" class="mobile-nav-link" id="mobile-friends-link"><i class="fas fa-user-friends"></i> Друзья</a>
+    <a href="#" class="mobile-nav-link" id="mobile-friends-link"><i class="fas fa-user-friends"></i> Друзья</a>
+    <a href="#" class="mobile-nav-link" id="mobile-settings-link"><i class="fas fa-cog"></i> Настройки</a>
+    <a href="../auth/auth.html" class="mobile-nav-link" id="mobile-logout-link"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrapper">
+
+    <!-- PAGE HERO -->
+    <section class="hero" style="padding:24px 0 8px">
+        <div class="hero-content" style="justify-content:center;text-align:center">
+            <div class="hero-text">
+                <h1 class="hero-title" style="font-size:1.8rem">Сообщество AresCraftX</h1>
+                <p class="hero-subtitle" style="margin-bottom:0">Присоединяйтесь к нам — общайтесь, играйте и развивайтесь вместе</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIALS -->
+    <section style="margin-bottom:36px;">
+        <div class="section-header">
+            <h2><i class="fas fa-share-alt"></i> Социальные сети</h2>
+        </div>
+        <div class="socials-grid">
+            <!-- Telegram -->
+            <a href="https://t.me/arescraftx" target="_blank" class="social-card social-tg">
+                <div class="social-card-glow"></div>
+                <div class="social-card-content">
+                    <div class="social-icon"><i class="fab fa-telegram-plane"></i></div>
+                    <h3>Telegram</h3>
+                    <p>Основной канал с новостями, обновлениями и обсуждениями сервера.</p>
+                    <span class="social-link">@arescraftx <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <!-- Discord -->
+            <a href="https://discord.gg/JqzG7THVZ5" target="_blank" class="social-card social-dc">
+                <div class="social-card-glow"></div>
+                <div class="social-card-content">
+                    <div class="social-icon"><i class="fab fa-discord"></i></div>
+                    <h3>Discord</h3>
+                    <p>Голосовые каналы, чат, мероприятия и прямая связь с командой.</p>
+                    <span class="social-link">discord.gg/JqzG7THVZ5 <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <!-- TG Bot -->
+            <a href="https://t.me/arescraftx_support_bot" target="_blank" class="social-card social-bot">
+                <div class="social-card-glow"></div>
+                <div class="social-card-content">
+                    <div class="social-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Telegram Бот</h3>
+                    <p>Бот поддержки — быстрая помощь, информация о сервере и уведомления.</p>
+                    <span class="social-link">@arescraftx_support_bot <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@AresCraftX" target="_blank" class="social-card social-yt">
+                <div class="social-card-glow"></div>
+                <div class="social-card-content">
+                    <div class="social-icon"><i class="fab fa-youtube"></i></div>
+                    <h3>YouTube</h3>
+                    <p>Видеообзоры, гайды, стримы и контент о сервере.</p>
+                    <span class="social-link">@AresCraftX <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ARESCORD -->
+    <section style="margin-bottom:36px;">
+        <div class="arescord-banner">
+            <div class="arescord-banner-glow"></div>
+            <div class="arescord-banner-content">
+                <div class="arescord-logo"><i class="fas fa-comments"></i></div>
+                <h3>AresGram — Платформа для общения</h3>
+                <p>Будущая разработка — платформа для удобного общения между игроками AresCraftX.</p>
+                <div class="arescord-features">
+                    <span class="arescord-feat"><i class="fas fa-comments"></i> Общение</span>
+                    <span class="arescord-feat"><i class="fas fa-users"></i> Сообщество</span>
+                    <span class="arescord-feat"><i class="fas fa-bell"></i> Уведомления</span>
+                    <span class="arescord-feat"><i class="fas fa-clock"></i> Скоро</span>
+                </div>
+                <a href="../projects/aresgram/index.html" class="btn-hero-primary"><i class="fas fa-rocket"></i> Подробнее</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section style="margin-bottom:36px;">
+        <div class="section-header">
+            <h2><i class="fas fa-address-book"></i> Контакты</h2>
+        </div>
+        <div class="contacts-grid">
+            <div class="contact-card">
+                <div class="contact-icon contact-icon-dc"><i class="fab fa-discord"></i></div>
+                <h4>Discord</h4>
+                <a href="https://discord.gg/JqzG7THVZ5" target="_blank">discord.gg/JqzG7THVZ5</a>
+                <p>Основной сервер сообщества</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon contact-icon-tg"><i class="fab fa-telegram-plane"></i></div>
+                <h4>Telegram</h4>
+                <a href="https://t.me/arescraftx" target="_blank">@arescraftx</a>
+                <p>Канал и чат</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon contact-icon-bot"><i class="fas fa-robot"></i></div>
+                <h4>Бот поддержки</h4>
+                <a href="https://t.me/arescraftx_support_bot" target="_blank">@arescraftx_support_bot</a>
+                <p>Быстрая помощь 24/7</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h4>Email</h4>
+                <a href="mailto:arescraftx@gmail.com">arescraftx@gmail.com</a>
+                <p>Для деловых вопросов</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:36px;">
+        <div class="section-header">
+            <h2><i class="fas fa-question-circle"></i> Частые вопросы</h2>
+        </div>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Как подключиться к серверу?</summary>
+                <div class="faq-answer">Запустите Minecraft Java Edition (1.20–1.21.11), выберите «Мультиплеер» → «Добавить сервер» и введите адрес <strong>play.arescraftx.online</strong>. Подробная инструкция — на странице <a href="server.html"><span data-i18n="nav_server">Сервер</span></a>.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Сервер уже запущен?</summary>
+                <div class="faq-answer">Сервер находится в стадии разработки и подготовки к запуску. Следите за новостями в нашем <a href="https://discord.gg/JqzG7THVZ5" target="_blank">Discord</a> и <a href="https://t.me/arescraftx" target="_blank">Telegram</a>.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Какие режимы будут?</summary>
+                <div class="faq-answer">На старте будут доступны два режима: <strong>Анархия</strong> (кастомные механики, разрешено всё кроме правил) и <strong>Ванила+</strong> (классическое выживание с дополнениями — магазин и другое). В будущем планируются новые режимы.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Когда появятся ранги и донат?</summary>
+                <div class="faq-answer">Привилегии и система доната будут представлены после официального запуска сервера. Сейчас мы фокусируемся на разработке и качестве.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Как включить 2FA?</summary>
+                <div class="faq-answer">Нажмите кнопку ⚙️ <strong>Настройки</strong> в навбаре, перейдите в раздел <strong>Безопасность → 2FA</strong>, отсканируйте QR-код в приложении-аутентификаторе и введите 6-значный код для подтверждения.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Кто разрабатывает проект?</summary>
+                <div class="faq-answer">Проект создан и разрабатывается <strong>Poncho435</strong> — основателем и главным разработчиком. В ближайшее время команда расширится до 5+ человек.</div>
+            </details>
+            <details class="faq-item">
+                <summary><i class="fas fa-chevron-right"></i> Как связаться с поддержкой?</summary>
+                <div class="faq-answer">Напишите нашему боту <a href="https://t.me/arescraftx_support_bot" target="_blank">@arescraftx_support_bot</a> в Telegram, задайте вопрос в <a href="https://discord.gg/JqzG7THVZ5" target="_blank">Discord</a> или напишите на <a href="mailto:arescraftx@gmail.com">arescraftx@gmail.com</a>.</div>
+            </details>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="../assets/logo.png" class="footer-logo" alt=""> ARESCRAFTX
+                </div>
+                <p class="footer-about">Minecraft-экосистема нового поколения. Сервер, лаунчер, античит и платформа для общения.</p>
+            </div>
+            <div class="footer-col">
+                <h4><span data-i18n="footer_nav">Навигация</span></h4>
+                <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                <a href="server.html"><i class="fas fa-server"></i> Сервер</a>
+                <a href="community.html"><i class="fas fa-users"></i> Сообщество</a>
+            </div>
+            <div class="footer-col">
+                <h4><span data-i18n="footer_projects">Проекты</span></h4>
+                <a href="../projects/checkers/index.html"><i class="fas fa-shield-alt"></i> AresChecker</a>
+                <a href="../projects/launchers/index.html"><i class="fas fa-rocket"></i> AresLaunch</a>
+                <a href="../projects/aresgram/index.html"><i class="fas fa-comments"></i> AresGram</a>
+            </div>
+            <div class="footer-col">
+                <h4><span data-i18n="footer_account">Аккаунт</span></h4>
+                <a href="#" id="footer-profile-btn"><i class="fas fa-user"></i> <span id="footer-username">Профиль</span></a>
+                <a href="#" id="footer-settings-btn"><i class="fas fa-cog"></i> Настройки</a>
+                <a href="../auth/auth.html" id="footer-logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021–2026 AresCraftX. Все права защищены.</p>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                <div class="footer-socials">
+                    <a href="https://discord.gg/JqzG7THVZ5" class="footer-social" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://t.me/arescraftx" class="footer-social" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.youtube.com/@AresCraftX" class="footer-social" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div style="display:flex;gap:8px;font-size:.72rem;color:var(--text-3);">
+                    <a href="privacy.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Конфиденциальность</a>
+                    <span>·</span>
+                    <a href="cookies.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Cookie</a>
+                    <span>·</span>
+                    <a href="terms.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Условия</a>
+                    <span>·</span>
+                    <a href="disclaimer.html" style="color:var(--text-3);transition:.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'">Отказ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profile-modal">
+    <div class="modal-content modal-lg">
+        <div id="profile-view-mode">
+            <div class="profile-view-header">
+                <button class="btn-icon-only" id="profile-edit-toggle" title="Редактировать"><i class="fas fa-pen"></i></button>
+                <div class="profile-view-avatar-row">
+                    <img src="" id="view-avatar" class="profile-view-avatar" alt="">
+                    <div class="profile-view-main">
+                        <h2 id="view-username" class="profile-view-name">Игрок</h2>
+                        <span id="view-status-dot" class="profile-view-status-dot"></span>
+                        <span id="view-status-text" class="profile-view-status-text">В сети</span>
+                    </div>
+                </div>
+                <button class="modal-close" data-close="profile-modal">×</button>
+            </div>
+            <div class="profile-view-body">
+                <div id="view-description" class="profile-view-desc">Нет описания</div>
+                <div class="profile-view-stats">
+                    <div class="pv-stat"><i class="fas fa-envelope"></i><span id="view-email">—</span></div>
+                    <div class="pv-stat"><i class="fas fa-calendar"></i><span id="view-birthday">Не указана</span></div>
+                    <div class="pv-stat"><i class="fas fa-venus-mars"></i><span id="view-gender">Не указан</span></div>
+                    <div class="pv-stat"><i class="fas fa-gamepad"></i><span id="view-mc-nick">Не указан</span></div>
+                    <div class="pv-stat"><i class="fas fa-flag"></i><span id="view-mc-mode">Не выбран</span></div>
+                    <div class="pv-stat"><i class="fas fa-shield-alt"></i><span id="view-2fa">Отключена</span></div>
+                    <div class="pv-stat"><i class="fas fa-clock"></i><span id="view-last-login">—</span></div>
+                    <div class="pv-stat"><i class="fas fa-calendar-check"></i><span id="view-joined">—</span></div>
+                </div>
+                <div class="profile-view-links-section"><h4><i class="fas fa-link"></i> Ссылки</h4><div id="view-links" class="profile-view-links"></div></div>
+            </div>
+        </div>
+        <div id="profile-edit-mode" style="display:none">
+            <div class="modal-header"><h2><i class="fas fa-user-edit"></i> Редактирование профиля</h2><button class="modal-close" data-close="profile-modal">×</button></div>
+            <div class="profile-edit-avatar-section"><div class="profile-edit-avatar-wrap"><img src="" id="edit-avatar-preview" class="profile-edit-avatar" alt=""><label class="avatar-upload-overlay" for="edit-avatar-input"><i class="fas fa-camera"></i></label><input type="file" id="edit-avatar-input" accept="image/*" style="display:none"></div></div>
+            <div class="form-grid">
+                <div class="form-group"><label><i class="fas fa-user"></i> Имя пользователя</label><input type="text" id="edit-username" maxlength="30" placeholder="Username"></div>
+                <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="edit-email" disabled></div>
+                <div class="form-group"><label><i class="fas fa-calendar"></i> Дата рождения</label><input type="date" id="edit-birthday"></div>
+                <div class="form-group"><label><i class="fas fa-venus-mars"></i> Пол</label><select id="edit-gender"><option value="not_specified">Не указан</option><option value="male">Мужской</option><option value="female">Женский</option><option value="other">Другой</option></select></div>
+                <div class="form-group"><label><i class="fas fa-gamepad"></i> MC Ник</label><input type="text" id="edit-mc-nick" maxlength="16" placeholder="Ваш ник в Minecraft"></div>
+                <div class="form-group"><label><i class="fas fa-flag"></i> Режим</label><select id="edit-mc-mode"><option value="">Не выбран</option><option value="anarchy">Анархия</option><option value="vanilla">Ванила+</option></select></div>
+            </div>
+            <div class="form-group form-group-full"><label><i class="fas fa-pen"></i> О себе</label><textarea id="edit-description" maxlength="200" rows="3" placeholder="Расскажите о себе..."></textarea><span class="char-count" id="desc-char-count">0</span></div>
+            <div class="profile-links-editor"><h4><i class="fas fa-link"></i> Ссылки <span class="profile-links-count" id="links-count">(0/5)</span></h4><div id="links-editor-list"></div><button class="btn-secondary btn-sm" id="add-link-btn" style="margin-top:8px"><i class="fas fa-plus"></i> Добавить ссылку</button><div id="add-link-dropdown" class="add-link-dropdown" style="display:none"><div class="add-link-preset" data-link-type="telegram"><i class="fab fa-telegram"></i> Telegram</div><div class="add-link-preset" data-link-type="youtube"><i class="fab fa-youtube"></i> YouTube</div><div class="add-link-preset" data-link-type="discord"><i class="fab fa-discord"></i> Discord</div><div class="add-link-preset" data-link-type="vk"><i class="fab fa-vk"></i> VK</div><div class="add-link-preset" data-link-type="twitter"><i class="fab fa-x-twitter"></i> Twitter/X</div><div class="add-link-preset" data-link-type="website"><i class="fas fa-globe"></i> Сайт</div><div class="add-link-divider"></div><div class="add-link-preset" data-link-type="custom"><i class="fas fa-plus-circle"></i> Другая ссылка</div></div></div>
+            <div class="modal-status" id="profile-status"></div>
+            <div class="modal-buttons"><button class="btn-primary" id="save-profile-btn"><i class="fas fa-save"></i> Сохранить</button><button class="btn-secondary" id="cancel-edit-btn">Отмена</button></div>
+        </div>
+    </div>
+</div>
+
+<!-- ADMIN MODALS -->
+<div class="modal-overlay" id="admin-broadcast-modal"><div class="modal-content"><div class="modal-header"><h2><i class="fas fa-envelope"></i> Email рассылка</h2><button class="modal-close" data-close="admin-broadcast-modal">×</button></div><div class="form-group"><label><i class="fas fa-heading"></i> Тема</label><input type="text" id="admin-broadcast-subject" placeholder="Тема письма"></div><div class="form-group"><label><i class="fas fa-pen"></i> Сообщение</label><textarea id="admin-broadcast-message" rows="5" placeholder="Текст рассылки..."></textarea></div><div class="modal-status" id="admin-broadcast-status"></div><div class="modal-buttons"><button class="btn-primary" id="admin-broadcast-send"><i class="fas fa-paper-plane"></i> Отправить всем</button><button class="btn-secondary" data-close="admin-broadcast-modal">Отмена</button></div></div></div>
+<div class="modal-overlay" id="admin-push-modal"><div class="modal-content"><div class="modal-header"><h2><i class="fas fa-bell"></i> Push для всех</h2><button class="modal-close" data-close="admin-push-modal">×</button></div><div class="form-group"><label><i class="fas fa-heading"></i> Заголовок</label><input type="text" id="admin-push-title" placeholder="Заголовок уведомления"></div><div class="form-group"><label><i class="fas fa-pen"></i> Сообщение</label><textarea id="admin-push-message" rows="3" placeholder="Текст уведомления..."></textarea></div><div class="modal-status" id="admin-push-status"></div><div class="modal-buttons"><button class="btn-primary" id="admin-push-send"><i class="fas fa-paper-plane"></i> Отправить</button><button class="btn-secondary" data-close="admin-push-modal">Отмена</button></div></div></div>
+<div class="modal-overlay" id="admin-news-modal"><div class="modal-content"><div class="modal-header"><h2><i class="fas fa-newspaper"></i> Новая новость</h2><button class="modal-close" data-close="admin-news-modal">×</button></div><div class="form-group"><label><i class="fas fa-heading"></i> Заголовок</label><input type="text" id="admin-news-title" placeholder="Заголовок новости"></div><div class="form-group"><label><i class="fas fa-pen"></i> Содержание</label><textarea id="admin-news-content" rows="5" placeholder="Текст новости..."></textarea></div><div class="form-group"><label><i class="fas fa-tag"></i> Категория</label><select id="admin-news-category"><option value="system">Система</option><option value="news">Новости</option><option value="event">Ивент</option></select></div><div class="modal-status" id="admin-news-status"></div><div class="modal-buttons"><button class="btn-primary" id="admin-news-send"><i class="fas fa-paper-plane"></i> Опубликовать</button><button class="btn-secondary" data-close="admin-news-modal">Отмена</button></div></div></div>
+<div class="modal-overlay" id="admin-ban-modal"><div class="modal-content"><div class="modal-header"><h2><i class="fas fa-ban"></i> Бан пользователя</h2><button class="modal-close" data-close="admin-ban-modal">×</button></div><div class="form-group"><label><i class="fas fa-user"></i> ID или ник</label><input type="text" id="admin-ban-userid" placeholder="UUID или username"></div><div class="form-group"><label><i class="fas fa-pen"></i> Причина</label><textarea id="admin-ban-reason" rows="2" placeholder="Причина бана..."></textarea></div><div class="form-group"><label><i class="fas fa-clock"></i> Длительность</label><select id="admin-ban-duration"><option value="1h">1 час</option><option value="1d">1 день</option><option value="7d">7 дней</option><option value="30d">30 дней</option><option value="permanent">Навсегда</option></select></div><div class="modal-status" id="admin-ban-status"></div><div class="modal-buttons"><button class="btn-danger" id="admin-ban-send"><i class="fas fa-ban"></i> Забанить</button><button class="btn-secondary" data-close="admin-ban-modal">Отмена</button></div></div></div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+    <div class="modal-content modal-xl">
+        <div class="modal-header">
+            <h2><i class="fas fa-cog"></i> Настройки</h2>
+            <button class="modal-close" data-close="settings-modal">×</button>
+        </div>
+        <div class="settings-layout">
+            <div class="settings-nav">
+                <button class="settings-nav-item active" data-settings-tab="account"><i class="fas fa-user"></i> <span data-i18n="settings_account">Аккаунт</span></button>
+                <button class="settings-nav-item" data-settings-tab="mc"><i class="fas fa-gamepad"></i> <span data-i18n="settings_mc">Minecraft</span></button>
+                <button class="settings-nav-item" data-settings-tab="appearance"><i class="fas fa-palette"></i> <span data-i18n="settings_appearance">Внешний вид</span></button>
+                <button class="settings-nav-item" data-settings-tab="security"><i class="fas fa-shield-alt"></i> <span data-i18n="settings_security">Безопасность</span></button>
+                <button class="settings-nav-item" data-settings-tab="notifications"><i class="fas fa-bell"></i> <span data-i18n="settings_notifs">Уведомления</span></button>
+                <button class="settings-nav-item settings-nav-item-danger" data-settings-tab="danger"><i class="fas fa-exclamation-triangle"></i> <span data-i18n="settings_danger">Опасная зона</span></button>
+            </div>
+            <div class="settings-content">
+                <!-- ACCOUNT -->
+                <div class="settings-tab active" id="tab-account">
+                    <h3>Аккаунт</h3>
+                    <p class="settings-desc">Основная информация профиля</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-id-card"></i> Данные аккаунта</h4>
+                        <div class="form-group"><label><i class="fas fa-user"></i> Имя пользователя</label><input type="text" id="s-username"></div>
+                        <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="s-email" disabled></div>
+                        <div class="form-group"><label><i class="fas fa-calendar"></i> Дата рождения</label><input type="date" id="s-birthday"></div>
+                        <div class="form-group"><label><i class="fas fa-venus-mars"></i> Пол</label><select id="s-gender"><option value="not_specified">Не указан</option><option value="male">Мужской</option><option value="female">Женский</option><option value="other">Другой</option></select></div>
+                        <div class="form-group"><label><i class="fas fa-pen"></i> О себе</label><textarea id="s-description" rows="2"></textarea></div>
+                        <h4 style="margin-top:16px;font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px;"><i class="fas fa-circle" style="color:var(--green);font-size:.5rem;"></i> Статус</h4>
+                        <div class="status-select">
+                            <div class="status-option" data-status="online" onclick="setStatus('online',this)"><span class="status-dot status-dot-online"></span> В сети</div>
+                            <div class="status-option" data-status="dnd" onclick="setStatus('dnd',this)"><span class="status-dot status-dot-dnd"></span> Не беспокоить</div>
+                            <div class="status-option" data-status="offline" onclick="setStatus('offline',this)"><span class="status-dot status-dot-offline"></span> Не в сети</div>
+                        </div>
+                        <div class="modal-status" id="account-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="save-account-btn"><i class="fas fa-save"></i> Сохранить</button></div>
+                    </div>
+                </div>
+                <!-- MINECRAFT -->
+                <div class="settings-tab" id="tab-mc">
+                    <h3>Minecraft</h3>
+                    <p class="settings-desc">Настройки игрового профиля</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-gamepad"></i> Игровой профиль</h4>
+                        <div class="form-group"><label><i class="fas fa-user"></i> MC Ник</label><input type="text" id="s-mc-nick" maxlength="16" placeholder="Ваш ник в Minecraft"></div>
+                        <div class="form-group"><label><i class="fas fa-flag"></i> Предпочитаемый режим</label><select id="s-mc-mode"><option value="">Не выбран</option><option value="anarchy">Анархия</option><option value="vanilla">Ванила+</option></select></div>
+                        <div class="modal-status" id="mc-settings-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="save-mc-btn"><i class="fas fa-save"></i> Сохранить</button></div>
+                    </div>
+                </div>
+                <!-- APPEARANCE -->
+                <div class="settings-tab" id="tab-appearance">
+                    <h3>Внешний вид</h3>
+                    <p class="settings-desc">Настройте тему и отображение</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-language"></i> Язык</h4>
+                        <div class="settings-row">
+                            <span class="settings-row-label">Язык интерфейса</span>
+                            <select id="settings-lang-select" style="padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-s);color:var(--text-1);font-size:.88rem;outline:none;cursor:pointer">
+                                <option value="ru">🇷🇺 Русский</option>
+                                <option value="en">🇬🇧 English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-palette"></i> Тема оформления</h4>
+                        <div class="theme-cards">
+                            <div class="theme-card" data-theme-val="dark"><div class="theme-card-preview theme-preview-dark">🌙</div>Тёмная</div>
+                            <div class="theme-card" data-theme-val="light"><div class="theme-card-preview theme-preview-light">☀️</div>Светлая</div>
+                            <div class="theme-card" data-theme-val="crimson"><div class="theme-card-preview theme-preview-crimson">🔴</div>Алый</div>
+                            <div class="theme-card" data-theme-val="emerald"><div class="theme-card-preview theme-preview-emerald">💚</div>Изумруд</div>
+                            <div class="theme-card" data-theme-val="ocean"><div class="theme-card-preview theme-preview-ocean">🌊</div>Океан</div>
+                            <div class="theme-card" data-theme-val="royal"><div class="theme-card-preview theme-preview-royal">👑</div>Королевская</div>
+                            <div class="theme-card" data-theme-val="cyber"><div class="theme-card-preview theme-preview-cyber">⚡</div>Кибер</div>
+                            <div class="theme-card" data-theme-val="midnight"><div class="theme-card-preview theme-preview-midnight">🌌</div>Полночь</div>
+                            <div class="theme-card" data-theme-val="sunset"><div class="theme-card-preview theme-preview-sunset">🌅</div>Закат</div>
+                            <div class="theme-card" data-theme-val="lavender"><div class="theme-card-preview theme-preview-lavender">💜</div>Лаванда</div>
+                            <div class="theme-card" data-theme-val="mono"><div class="theme-card-preview theme-preview-mono">⬜</div>Монокол</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SECURITY -->
+                <div class="settings-tab" id="tab-security">
+                    <h3><span data-i18n="feat_security">Безопасность</span></h3>
+                    <p class="settings-desc">Пароль, 2FA и сессии</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-key"></i> Смена пароля</h4>
+                        <div class="form-group"><label><i class="fas fa-lock"></i> Новый пароль</label><div class="password-wrap"><input type="password" id="s-new-password" placeholder="Минимум 8 символов"><button type="button" class="password-toggle" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';this.innerHTML=i.type==='password'?'<i class=\'fas fa-eye\'></i>':'<i class=\'fas fa-eye-slash\'></i>'"><i class="fas fa-eye"></i></button></div></div>
+                        <div class="form-group"><label><i class="fas fa-check-circle"></i> Подтвердите пароль</label><div class="password-wrap"><input type="password" id="s-confirm-password" placeholder="Повторите пароль"><button type="button" class="password-toggle" onclick="const i=this.previousElementSibling;i.type=i.type==='password'?'text':'password';this.innerHTML=i.type==='password'?'<i class=\'fas fa-eye\'></i>':'<i class=\'fas fa-eye-slash\'></i>'"><i class="fas fa-eye"></i></button></div></div>
+                        <div class="modal-status" id="password-status"></div>
+                        <div class="modal-buttons"><button class="btn-primary" id="btn-save-password"><i class="fas fa-save"></i> Сменить пароль</button></div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-shield-alt"></i> Двухфакторная аутентификация</h4>
+                        <div id="mfa-status"></div>
+                        <div id="mfa-setup-area" style="display:none;">
+                            <div id="qr-code-container" style="text-align:center;"></div>
+                            <p style="text-align:center;color:var(--text-2);font-size:.85rem;margin:12px 0;">Введите 6-значный код из приложения:</p>
+                            <div class="code-inputs" id="mfa-code-inputs">
+                                <input type="text" maxlength="1" class="code-box">
+                                <input type="text" maxlength="1" class="code-box">
+                                <input type="text" maxlength="1" class="code-box">
+                                <input type="text" maxlength="1" class="code-box">
+                                <input type="text" maxlength="1" class="code-box">
+                                <input type="text" maxlength="1" class="code-box">
+                            </div>
+                            <div class="modal-buttons" style="justify-content:center;">
+                                <button class="btn-primary" id="mfa-verify-btn"><i class="fas fa-check"></i> Подтвердить</button>
+                                <button class="btn-secondary" id="mfa-cancel-setup">Отмена</button>
+                            </div>
+                        </div>
+                        <div id="mfa-enabled-area" style="display:none;">
+                            <p style="color:var(--green);font-size:.85rem;margin-bottom:8px;"><i class="fas fa-check-circle"></i> 2FA включена — ваш аккаунт под защитой</p>
+                            <button class="btn-danger" id="mfa-disable-btn"><i class="fas fa-times"></i> Отключить 2FA</button>
+                        </div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-history"></i> Журнал безопасности</h4>
+                        <p style="font-size:.82rem;color:var(--text-2);margin-bottom:12px;">Последние действия с вашим аккаунтом</p>
+                        <div id="audit-log" style="max-height:200px;overflow-y:auto;"></div>
+                    </div>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-desktop"></i> Активные сессии</h4>
+                        <div class="session-info">
+                            <div class="session-row"><i class="fas fa-user"></i> <strong id="s-username-display">—</strong></div>
+                            <div class="session-row"><i class="fas fa-clock"></i> Последний вход: <strong id="s-last-login">—</strong></div>
+                            <div class="session-row"><i class="fas fa-laptop"></i> Устройство: <strong id="s-device">—</strong></div>
+                        </div>
+                        <div class="session-list" id="session-list"></div>
+                    </div>
+                </div>
+                <!-- NOTIFICATIONS -->
+                <div class="settings-tab" id="tab-notifications">
+                    <h3>Уведомления</h3>
+                    <p class="settings-desc">Управление оповещениями</p>
+                    <div class="settings-section-inner">
+                        <h4><i class="fas fa-bell"></i> Оповещения</h4>
+                        <div class="settings-row"><span class="settings-row-label">Email-уведомления</span><label class="toggle-switch"><input type="checkbox" id="notif-email"><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Уведомление о входе</span><label class="toggle-switch"><input type="checkbox" id="notif-login" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Новости</span><label class="toggle-switch"><input type="checkbox" id="notif-news" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Ивенты</span><label class="toggle-switch"><input type="checkbox" id="notif-events" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">MC Чат</span><label class="toggle-switch"><input type="checkbox" id="notif-mc-chat" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">PVP уведомления</span><label class="toggle-switch"><input type="checkbox" id="notif-pvp" checked><span class="toggle-slider"></span></label></div>
+                        <div class="settings-row"><span class="settings-row-label">Личные сообщения</span><label class="toggle-switch"><input type="checkbox" id="notif-pm" checked><span class="toggle-slider"></span></label></div>
+                    </div>
+                </div>
+                <!-- DANGER ZONE -->
+                <div class="settings-tab" id="tab-danger">
+                    <h3>Опасная зона</h3>
+                    <p class="settings-desc">Необратимые действия</p>
+                    <div class="settings-section-inner settings-section-danger">
+                        <h4><i class="fas fa-sign-out-alt"></i> Выход из аккаунта</h4>
+                        <p style="font-size:.85rem;color:var(--text-2);margin-bottom:12px;">Завершить все сессии и выйти</p>
+                        <button class="btn-danger" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TOASTS -->
+<button id="scroll-top" title="Наверх"><i class="fas fa-chevron-up"></i></button>
+<div id="toast-container"></div>
+
+<!-- NOTIFICATION DROPDOWN -->
+<div class="notif-dropdown" id="notif-dropdown" style="position:fixed;top:60px;right:20px;z-index:10001">
+    <div class="notif-dropdown-header"><h4><i class="fas fa-bell" style="color:var(--accent)"></i> Уведомления <span id="notif-count">0</span></h4><div style="display:flex;gap:6px"><button class="mark-read-btn" id="clear-read-btn" title="Очистить прочитанные"><i class="fas fa-broom"></i></button><button class="mark-read-btn" id="mark-all-read-btn"><i class="fas fa-check-double"></i> Прочитать</button></div></div>
+    <div class="notif-list" id="notif-list"></div>
+</div>
+
+<!-- FRIENDS MODAL -->
+<div class="modal-overlay" id="friends-modal">
+    <div class="modal-content friends-panel">
+        <div class="modal-header"><h2><i class="fas fa-user-friends"></i> Друзья <span id="friends-count" style="color:var(--text-3);font-size:.85rem;font-weight:400">(0)</span></h2><button class="modal-close" data-close="friends-modal">×</button></div>
+        <div class="friends-search"><input type="text" id="friend-search-input" placeholder="Поиск по нику..." maxlength="30"></div>
+        <div id="friend-search-results" style="margin-bottom:12px"></div>
+        <div class="friends-tabs">
+            <button class="friends-tab active" data-friends-tab="friends">Друзья</button>
+            <button class="friends-tab" data-friends-tab="incoming">Входящие <span id="incoming-count" style="color:var(--accent);font-size:.75rem"></span></button>
+            <button class="friends-tab" data-friends-tab="outgoing">Исходящие <span id="outgoing-count" style="color:var(--text-3);font-size:.75rem"></span></button>
+        </div>
+        <div id="friends-list-section" data-friends-section="friends"><div id="friends-list"></div></div>
+        <div id="friend-requests-section" style="display:none" data-friends-section="incoming"><div class="friends-section-title"><i class="fas fa-inbox"></i> Входящие запросы</div><div id="friend-requests-list"></div></div>
+        <div id="outgoing-requests-section" style="display:none" data-friends-section="outgoing"><div class="friends-section-title"><i class="fas fa-paper-plane"></i> Исходящие запросы</div><div id="outgoing-requests-list"></div></div>
+    </div>
+</div>
+
+<!-- COOKIE CONSENT -->
+<div class="cookie-consent" id="cookie-consent">
+    <p>🍪 Мы используем cookie для работы авторизации и сохранения настроек. Продолжая использовать сайт, вы соглашаетесь с <a href="cookies.html">политикой cookie</a>.</p>
+    <button class="cookie-accept" id="cookie-accept"><span data-i18n="cookie_accept">Принять</span></button>
+    <button class="cookie-decline" id="cookie-decline"><span data-i18n="cookie_decline">Только необходимые</span></button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="security.js?v=11"></script>
+<script src="mod/i.js?v=11"></script>
+<script>
+    document.getElementById('footer-profile-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('profile-btn')?.click()});
+    // Friends tabs
+    document.querySelectorAll('.friends-tab[data-friends-tab]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.friends-tab[data-friends-tab]').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab=btn.dataset.friendsTab;
+        document.querySelectorAll('[data-friends-section]').forEach(s=>s.style.display='none');
+        const sec=document.querySelector('[data-friends-section="'+tab+'"]');
+        if(sec)sec.style.display='block';
+      });
+    });
+    document.getElementById('footer-settings-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('settings-btn')?.click()});
+    document.getElementById('footer-logout-btn')?.addEventListener('click',e=>{e.preventDefault();document.getElementById('logout-btn')?.click()});
+    const fbu=document.getElementById('footer-username');
+    if(fbu){const un=document.getElementById('user-name');if(un)fbu.textContent=un.textContent||'Профиль';new MutationObserver(()=>fbu.textContent=un.textContent).observe(un,{childList:true})}
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{})}</script>
+<script>(function(){const c=document.getElementById('cookie-consent');if(!c)return;if(!localStorage.getItem('acx_cookie_consent')){c.classList.add('visible')}document.getElementById('cookie-accept')?.addEventListener('click',()=>{localStorage.setItem('acx_cookie_consent','all');c.classList.remove('visible')});document.getElementById('cookie-decline')?.addEventListener('click',()=>{localStorage.setItem('acx_cookie_consent','necessary');c.classList.remove('visible')})})();</script>
+</body>
+</html>
