@@ -1,188 +1,99 @@
-# Деплой AresCraftX на Cloudflare
+# Деплой AresCraftX на Cloudflare Pages
 
-## 0. САМОЕ ГЛАВНОЕ: у тебя Worker, а команда — от Pages
+Проект — **Cloudflare Pages**, `arescraftx.pages.dev` открывается,
+домен `arescraftx.online` в Cloudflare в статусе **Active**.
 
-В логе сборки есть строка:
+## 1. Почему падает сборка: `Authentication error [code: 10000]`
+
+Строка из лога:
 
 ```
 Executing user deploy command: npx wrangler pages deploy . --project-name=arescraftx
+ℹ️  The API Token is read from the CLOUDFLARE_API_TOKEN environment variable.
 ```
 
-Отдельное поле **«deploy command»** существует у **Workers Builds**.
-У Cloudflare **Pages** такого поля нет — там есть «build command», а публикация
-происходит автоматически.
+Происходит вот что: **внутри сборки Pages запускается ещё один деплой Pages
+через Wrangler**. Это лишний слой, и он ломается, потому что переменная
+`CLOUDFLARE_API_TOKEN` перебивает встроенную авторизацию Pages, а у самого
+токена **нет права `Cloudflare Pages: Edit`**.
 
-Значит, в дашборде создан **Worker**, а не Pages-проект. Токен, который
-Workers Builds генерирует сам, имеет права **только на Workers** и не имеет прав
-на Pages. Поэтому запрос к `/accounts/.../pages/projects/arescraftx` возвращает
-`Authentication error [code: 10000]`. Никакие правки в репозитории это не
-чинят — команда задана в дашборде.
+Важно: «Super Administrator» в логе — это роль **твоего пользователя**,
+а не токена. У API-токена свой отдельный, гораздо более узкий набор прав.
+Поэтому `whoami` отрабатывает (хватает `User Details: Read`),
+а `pages deploy` — нет.
 
-### Что сделать (2 минуты)
+То, что `arescraftx.pages.dev` открывается, означает, что **старый деплой
+успел пройти раньше**. Сейчас публикуется именно он — все новые коммиты
+на сайт не попадают, пока сборка падает.
 
-1. Cloudflare Dashboard → **Workers & Pages** → `arescraftx`
-2. **Settings** → **Build** → **Deploy command**
-3. Заменить
+### Решение А (рекомендуется) — убрать Wrangler из сборки
 
-   ```
-   npx wrangler pages deploy . --project-name=arescraftx
-   ```
+Сайт полностью статический, собирать нечего. Pages опубликует файлы из Git сам.
 
-   на
+1. Dashboard → **Workers & Pages** → `arescraftx` → **Settings**
+2. Раздел **Build**:
 
-   ```
-   npx wrangler deploy
-   ```
+   | Поле | Значение |
+   |---|---|
+   | Build command | *(пусто)* |
+   | **Deploy command** | *(пусто — удалить `npx wrangler pages deploy ...`)* |
+   | Build output directory | `/` |
+   | Framework preset | `None` |
+   | Production branch | `main` |
 
-4. **Build command** оставить пустым
-5. Сохранить → **Retry deployment**
+3. Раздел **Variables and Secrets**: удалить `CLOUDFLARE_API_TOKEN`
+   и `CLOUDFLARE_ACCOUNT_ID`, если они там есть.
+4. **Deployments** → **Retry deployment**.
 
-Всё остальное уже подготовлено в репозитории:
+### Решение Б — оставить Wrangler, но дать токену права
 
-| Файл | Зачем |
-|---|---|
-| `wrangler.jsonc` | конфиг Worker'а со статикой (`assets.directory = "./"`) |
-| `.assetsignore` | чтобы `.git`, `tools/`, `LICENSE` и т. п. не публиковались |
-| `404.html` | корневая страница ошибки для `not_found_handling` |
+Нужно, только если деплой обязан идти через Wrangler (например, из GitHub Actions).
 
-Проверено локально: `npx wrangler deploy --dry-run` проходит без ошибок.
+1. https://dash.cloudflare.com/profile/api-tokens → нужный токен → **Edit**
+   (или **Create Token** → шаблон **«Edit Cloudflare Workers»**)
+2. Права минимум:
 
-> Примечание: количество файлов, которое печатает `--dry-run`
-> («Read 285 files»), — это обход каталога **до** применения `.assetsignore`,
-> фильтрация происходит на этапе загрузки. Не пугайся большого числа.
+   | Тип | Ресурс | Уровень |
+   |---|---|---|
+   | Account | **Cloudflare Pages** | **Edit** |
+   | Account | Account Settings | Read |
+   | User | User Details | Read |
+
+3. **Account Resources** → `Mhrtvb.a304093@gmail.com's Account`
+   (`3677ffcd173c6591fbcfd8a888ec8ca2`)
+4. Обновить переменную `CLOUDFLARE_API_TOKEN` в настройках проекта → Retry.
+
+> Про шаблоны токенов: «Read All Resources» не подходит — он умеет только
+> читать. Нужен именно **Edit**-шаблон, иначе будет ровно та же ошибка 10000.
 
 ---
 
-## 1. Если ты всё-таки хочешь именно Pages, а не Worker
+## 2. Домен arescraftx.online не открывается
 
-Тогда команду менять не надо, но надо чинить права токена.
+Зона в статусе Active — это значит, что **домен управляется Cloudflare**,
+но это ещё **не** значит, что он привязан к проекту Pages. Это два разных шага.
 
-### Ошибка сборки: `Authentication error [code: 10000]`
+1. Dashboard → **Workers & Pages** → `arescraftx` → вкладка **Custom domains**
+2. **Set up a domain** → ввести `arescraftx.online` → подтвердить
+3. Повторить для `www.arescraftx.online`
+4. Дождаться статуса **Active** у самого домена в этой вкладке
+   (обычно 1–5 минут, сертификат — до 15)
 
-Лог сборки:
-
-```
-✘ [ERROR] A request to the Cloudflare API
-  (/accounts/3677ffcd173c6591fbcfd8a888ec8ca2/pages/projects/arescraftx) failed.
-  Authentication error [code: 10000]
-📎 It looks like you are authenticating Wrangler via a custom API token
-   set in an environment variable.
-```
-
-### Что это значит
-
-Токен **валидный** (Wrangler успешно показал аккаунт и написал
-«Super Administrator»), но у него **нет права `Cloudflare Pages: Edit`**.
-
-Важно: роль «Super Administrator» относится к вашему **пользователю**, а не к
-API-токену. У токена есть свой собственный, отдельный и обычно гораздо более
-узкий набор разрешений. Именно поэтому `wrangler whoami` работает
-(нужен только `User Details: Read`), а `pages deploy` — нет.
-
-### Решение А — убрать `CLOUDFLARE_API_TOKEN`
-
-Если сборка запускается **самим Cloudflare Pages** (через Git-интеграцию),
-то токен вообще не нужен: Pages авторизует деплой внутренне.
-Переменная `CLOUDFLARE_API_TOKEN` в окружении сборки **перебивает** встроенную
-авторизацию и ломает её.
-
-1. Cloudflare Dashboard → **Workers & Pages** → проект `arescraftx`
-2. **Settings** → **Environment variables** (и **Build** → variables)
-3. Удалить `CLOUDFLARE_API_TOKEN` **и** `CLOUDFLARE_ACCOUNT_ID`,
-   если они там заданы
-4. **Deployments** → **Retry deployment**
-
-### Решение Б — выдать токену нужные права
-
-Если токен нужен (например, деплой идёт из GitHub Actions):
-
-1. Открыть https://dash.cloudflare.com/profile/api-tokens
-2. Найти используемый токен → **Edit** (или создать новый по шаблону
-   **«Edit Cloudflare Workers»**)
-3. Права должны включать как минимум:
-
-   | Тип     | Ресурс                | Уровень |
-   |---------|-----------------------|---------|
-   | Account | **Cloudflare Pages**  | **Edit** |
-   | Account | Workers Scripts       | Edit    |
-   | Account | Account Settings      | Read    |
-   | User    | User Details          | Read    |
-
-4. **Account Resources** → выбрать
-   `Mhrtvb.a304093@gmail.com's Account` (`3677ffcd173c6591fbcfd8a888ec8ca2`)
-5. Сохранить, скопировать токен, обновить переменную и перезапустить сборку
-
-### Решение В — создать настоящий Pages-проект
-
-Cloudflare Dashboard → **Workers & Pages** → **Create** → вкладка **Pages** →
-**Connect to Git** → выбрать репозиторий `Poncho435/AresCraftX--`.
-
-Настройки:
-
-| Настройка | Значение |
-|---|---|
-| Production branch | `main` |
-| Build command | *(пусто)* |
-| Build output directory | `/` |
-| Framework preset | `None` |
-
-Тогда ни Wrangler, ни токен не нужны совсем — Pages просто заберёт файлы из
-репозитория и опубликует их.
-
-### Решение Г — упростить саму команду деплоя
-
-Текущая команда:
+Проверить, что домен реально указывает на Pages:
+**DNS** зоны `arescraftx.online` → должна быть запись
 
 ```
-npx wrangler pages deploy . --project-name=arescraftx
+CNAME   @    arescraftx.pages.dev   (Proxied, оранжевое облако)
 ```
 
-Проблема: сайт статический и лежит в корне репозитория, поэтому Wrangler
-загружает вообще всё, включая `LICENSE`, `SECURITY.md`, `nginx-security.conf`
-и `tools/`. Для чистого статического сайта на Pages **команда сборки не нужна
-совсем**:
-
-- **Build command:** *(пусто)*
-- **Build output directory:** `/` (корень)
-- **Framework preset:** `None`
-
-Тогда Pages просто заберёт файлы из репозитория и опубликует их — ни Wrangler,
-ни токен не понадобятся. Это самый надёжный вариант для этого проекта.
+Если там A-запись на старый хостинг или запись вообще отсутствует —
+сайт открываться не будет, даже когда зона Active.
 
 ---
 
-## 2. «Не могу найти сайт в браузере»
+## 3. Сайт не находится через поиск
 
-Здесь нужно разделять **два разных действия**.
-
-### Открыть сайт напрямую
-
-В адресной строке нужно вводить **полный домен**, а не название проекта:
-
-```
-arescraftx.online
-```
-
-Если написать в адресной строке просто `arescraftx`, браузер воспримет это как
-**поисковый запрос**, а не как адрес, и отправит в Google/Яндекс.
-
-Проверьте по очереди:
-
-1. `https://arescraftx.online` — рабочий домен
-2. `https://arescraftx.pages.dev` — технический адрес Cloudflare Pages
-   (работает сразу после успешного деплоя, даже если домен не настроен)
-
-Если `*.pages.dev` открывается, а `arescraftx.online` — нет, значит проблема в
-привязке домена: Pages → проект → **Custom domains** → **Set up a domain**, и
-домен должен быть в статусе **Active**, а его NS-серверы — указывать на
-Cloudflare.
-
-**Пока деплой падает с ошибкой (пункт 1), сайта на хостинге просто нет** —
-и открываться ему неоткуда. Сначала чиним деплой.
-
-### Найти сайт через поиск (Google / Яндекс)
-
-Это не происходит автоматически и не мгновенно. Что было не так:
+Индексация не происходит автоматически и не мгновенно. Что было не так в коде:
 
 | Проблема | Статус |
 |---|---|
@@ -221,7 +132,7 @@ site:arescraftx.online
 
 ---
 
-## 3. Обслуживание метатегов
+## 4. Обслуживание метатегов
 
 Все SEO-теги генерируются скриптом:
 
