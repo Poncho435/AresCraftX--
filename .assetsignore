@@ -4,8 +4,6 @@
 # Workers Static Assets — не исключает, нужно перечислять явно.
 
 # Конфигурация (работает, но не отдаётся наружу)
-_headers
-_redirects
 wrangler.jsonc
 wrangler.toml
 .assetsignore

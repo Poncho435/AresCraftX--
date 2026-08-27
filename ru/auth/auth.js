@@ -1,7 +1,7 @@
 // auth.js — регистрация, вход, 2FA, восстановление пароля
 document.addEventListener('DOMContentLoaded', async () => {
-    const SUPABASE_URL = 'https://bkgqkchtkjttmndmkmps.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJrZ3FrY2h0a2p0dG1uZG1rbXBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMzcyODcsImV4cCI6MjA5OTkxMzI4N30.LjkEiWmP_maz5HyF7CudQ0MmIE12-8bTdw1dA32Yxuw';
+    const SUPABASE_URL = 'https://ggyaitqgukjgcjscvwjj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdneWFpdHFndWtqZ2Nqc2N2d2pqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4MzQyMjMsImV4cCI6MjEwMzQxMDIyM30.-q2fXEDe93wverb3qYgDkrQqnR_QLbytXQYKDFvlUBs';
     
     const SERVICE_ID = 'service_wao8uyu';
     const TEMPLATE_ID = 'template_aoqajd5';
