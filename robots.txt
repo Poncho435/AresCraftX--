@@ -1,14 +1,40 @@
+# AresCraftX — robots.txt
+# https://arescraftx.online/
+
 User-agent: *
+
+# Разрешаем всё публичное, включая CSS/JS —
+# без них Google не может отрендерить страницу и хуже её ранжирует.
+Allow: /
 Allow: /ru/main/
+Allow: /en/main/
 Allow: /ru/projects/
+Allow: /en/projects/
+Allow: /ru/assets/
+Allow: /en/assets/
+Allow: /ru/main/res/
+Allow: /en/main/res/
+
+# Закрытые разделы
 Disallow: /ru/auth/
+Disallow: /en/auth/
+Disallow: /ru/admin/
+Disallow: /en/admin/
+
+# Служебные файлы
 Disallow: /ru/config.json
+Disallow: /en/config.json
 Disallow: /ru/database.sql
+Disallow: /en/database.sql
 Disallow: /ru/main/sw.js
+Disallow: /en/main/sw.js
 Disallow: /ru/main/offline.html
+Disallow: /en/main/offline.html
 Disallow: /ru/main/security.js
-Disallow: /ru/main/script.js
-Disallow: /ru/main/style.css
-Disallow: /en/
+Disallow: /en/main/security.js
+
+# Служебные каталоги хостинга/репозитория
+Disallow: /.git/
+Disallow: /tools/
 
 Sitemap: https://arescraftx.online/sitemap.xml
