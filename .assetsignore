@@ -1,0 +1,24 @@
+# Файлы, которые НЕ должны публиковаться как статические ассеты.
+# Синтаксис как у .gitignore.
+# Cloudflare Pages исключал часть из них автоматически,
+# Workers Static Assets — не исключает, нужно перечислять явно.
+
+# Конфигурация (работает, но не отдаётся наружу)
+_headers
+_redirects
+wrangler.jsonc
+wrangler.toml
+.assetsignore
+
+# Служебное содержимое репозитория
+.git
+**/.git
+**/.github
+**/node_modules
+**/.DS_Store
+tools
+DEPLOY.md
+README.md
+SECURITY.md
+LICENSE
+nginx-security.conf

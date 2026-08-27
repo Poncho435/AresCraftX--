@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | AresCraftX</title>
+    <link rel="icon" type="image/png" href="/ru/assets/logo.png" sizes="32x32">
+    <meta name="theme-color" content="#ff8800">
+    <meta name="description" content="Страница не найдена. Вернитесь на главную AresCraftX. / Page not found. Return to the AresCraftX homepage.">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #06050a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .code {
+            font-size: clamp(72px, 18vw, 140px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -4px;
+            background: linear-gradient(135deg, #ff8800, #ff3c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h1 { font-size: clamp(18px, 4vw, 24px); margin: 12px 0 8px; font-weight: 600; }
+        p { color: #8a8a94; font-size: 15px; line-height: 1.6; margin-bottom: 28px; }
+        .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        a {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(255, 136, 0, .35);
+            color: #ff8800;
+            background: rgba(255, 136, 0, .07);
+            transition: background .2s, transform .2s;
+        }
+        a:hover { background: rgba(255, 136, 0, .16); transform: translateY(-2px); }
+        a.primary { background: linear-gradient(135deg, #ff8800, #ff5500); color: #0b0910; border-color: transparent; }
+        .foot { margin-top: 36px; font-size: 12px; color: #55555f; }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="code">404</div>
+        <h1>Страница не найдена · Page not found</h1>
+        <p>
+            Такой страницы не существует или она была перемещена.<br>
+            This page does not exist or has been moved.
+        </p>
+        <div class="links">
+            <a class="primary" href="/">На главную · Home</a>
+            <a href="/ru/main/index.html">Русская версия</a>
+            <a href="/en/main/index.html">English version</a>
+        </div>
+        <div class="foot">&copy; 2021–2026 AresCraftX · play.arescraftx.online</div>
+    </main>
+</body>
+</html>

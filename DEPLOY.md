@@ -1,6 +1,63 @@
-# Деплой AresCraftX на Cloudflare Pages
+# Деплой AresCraftX на Cloudflare
 
-## 1. Ошибка сборки: `Authentication error [code: 10000]`
+## 0. САМОЕ ГЛАВНОЕ: у тебя Worker, а команда — от Pages
+
+В логе сборки есть строка:
+
+```
+Executing user deploy command: npx wrangler pages deploy . --project-name=arescraftx
+```
+
+Отдельное поле **«deploy command»** существует у **Workers Builds**.
+У Cloudflare **Pages** такого поля нет — там есть «build command», а публикация
+происходит автоматически.
+
+Значит, в дашборде создан **Worker**, а не Pages-проект. Токен, который
+Workers Builds генерирует сам, имеет права **только на Workers** и не имеет прав
+на Pages. Поэтому запрос к `/accounts/.../pages/projects/arescraftx` возвращает
+`Authentication error [code: 10000]`. Никакие правки в репозитории это не
+чинят — команда задана в дашборде.
+
+### Что сделать (2 минуты)
+
+1. Cloudflare Dashboard → **Workers & Pages** → `arescraftx`
+2. **Settings** → **Build** → **Deploy command**
+3. Заменить
+
+   ```
+   npx wrangler pages deploy . --project-name=arescraftx
+   ```
+
+   на
+
+   ```
+   npx wrangler deploy
+   ```
+
+4. **Build command** оставить пустым
+5. Сохранить → **Retry deployment**
+
+Всё остальное уже подготовлено в репозитории:
+
+| Файл | Зачем |
+|---|---|
+| `wrangler.jsonc` | конфиг Worker'а со статикой (`assets.directory = "./"`) |
+| `.assetsignore` | чтобы `.git`, `tools/`, `LICENSE` и т. п. не публиковались |
+| `404.html` | корневая страница ошибки для `not_found_handling` |
+
+Проверено локально: `npx wrangler deploy --dry-run` проходит без ошибок.
+
+> Примечание: количество файлов, которое печатает `--dry-run`
+> («Read 285 files»), — это обход каталога **до** применения `.assetsignore`,
+> фильтрация происходит на этапе загрузки. Не пугайся большого числа.
+
+---
+
+## 1. Если ты всё-таки хочешь именно Pages, а не Worker
+
+Тогда команду менять не надо, но надо чинить права токена.
+
+### Ошибка сборки: `Authentication error [code: 10000]`
 
 Лог сборки:
 
@@ -22,7 +79,7 @@ API-токену. У токена есть свой собственный, от
 узкий набор разрешений. Именно поэтому `wrangler whoami` работает
 (нужен только `User Details: Read`), а `pages deploy` — нет.
 
-### Решение А (рекомендуется) — убрать `CLOUDFLARE_API_TOKEN`
+### Решение А — убрать `CLOUDFLARE_API_TOKEN`
 
 Если сборка запускается **самим Cloudflare Pages** (через Git-интеграцию),
 то токен вообще не нужен: Pages авторизует деплой внутренне.
@@ -55,7 +112,24 @@ API-токену. У токена есть свой собственный, от
    `Mhrtvb.a304093@gmail.com's Account` (`3677ffcd173c6591fbcfd8a888ec8ca2`)
 5. Сохранить, скопировать токен, обновить переменную и перезапустить сборку
 
-### Решение В — упростить саму команду деплоя
+### Решение В — создать настоящий Pages-проект
+
+Cloudflare Dashboard → **Workers & Pages** → **Create** → вкладка **Pages** →
+**Connect to Git** → выбрать репозиторий `Poncho435/AresCraftX--`.
+
+Настройки:
+
+| Настройка | Значение |
+|---|---|
+| Production branch | `main` |
+| Build command | *(пусто)* |
+| Build output directory | `/` |
+| Framework preset | `None` |
+
+Тогда ни Wrangler, ни токен не нужны совсем — Pages просто заберёт файлы из
+репозитория и опубликует их.
+
+### Решение Г — упростить саму команду деплоя
 
 Текущая команда:
 
