@@ -1,50 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://arescraftx.online/</loc>
-        <lastmod>2026-07-20</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/index.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/index.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/index.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/server.html</loc>
-        <lastmod>2026-07-19</lastmod>
-        <changefreq>weekly</changefreq>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/server.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/server.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/server.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/server.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/server.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/community.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/community.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/community.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://arescraftx.online/en/main/community.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/community.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/community.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/ru/projects/launchers/index.html</loc>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/ru/projects/checkers/index.html</loc>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/ru/projects/arescord/index.html</loc>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/ru/projects/aresgram/index.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/projects/aresgram/index.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/projects/aresgram/index.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/projects/aresgram/index.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/projects/aresgram/index.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/projects/aresgram/index.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://arescraftx.online/ru/main/privacy.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/privacy.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/privacy.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/privacy.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/privacy.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/privacy.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/terms.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/terms.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/terms.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/cookies.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/cookies.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/cookies.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/cookies.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/cookies.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/cookies.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
         <loc>https://arescraftx.online/ru/main/disclaimer.html</loc>
-        <lastmod>2026-07-19</lastmod>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/disclaimer.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/disclaimer.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://arescraftx.online/en/main/disclaimer.html</loc>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://arescraftx.online/ru/main/disclaimer.html"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://arescraftx.online/en/main/disclaimer.html"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://arescraftx.online/"/>
+        <lastmod>2026-08-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.3</priority>
     </url>

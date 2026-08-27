@@ -12,6 +12,32 @@
   X-Robots-Tag: noindex, nofollow
   Allow: DENY
 
+# Служебные файлы репозитория — не должны попадать в поиск
+/tools/*
+  X-Robots-Tag: noindex, nofollow
+
+/SECURITY.md
+  X-Robots-Tag: noindex, nofollow
+
+/LICENSE
+  X-Robots-Tag: noindex, nofollow
+
+/nginx-security.conf
+  X-Robots-Tag: noindex, nofollow
+
+# Закрытые разделы
+/ru/auth/*
+  X-Robots-Tag: noindex, nofollow
+
+/en/auth/*
+  X-Robots-Tag: noindex, nofollow
+
+/ru/admin/*
+  X-Robots-Tag: noindex, nofollow
+
+/en/admin/*
+  X-Robots-Tag: noindex, nofollow
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
