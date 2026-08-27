@@ -1,97 +1,109 @@
-# Деплой AresCraftX на Cloudflare Pages
+# Деплой AresCraftX на Cloudflare Workers
 
-Проект — **Cloudflare Pages**, `arescraftx.pages.dev` открывается,
-домен `arescraftx.online` в Cloudflare в статусе **Active**.
-
-## 1. Почему падает сборка: `Authentication error [code: 10000]`
-
-Строка из лога:
+Проект развёрнут как **Worker со статическими ассетами** (Workers Builds),
+а не как Pages. Определяется по команде деплоя в логе сборки:
 
 ```
-Executing user deploy command: npx wrangler pages deploy . --project-name=arescraftx
-ℹ️  The API Token is read from the CLOUDFLARE_API_TOKEN environment variable.
+Executing user deploy command: npx wrangler versions upload
 ```
 
-Происходит вот что: **внутри сборки Pages запускается ещё один деплой Pages
-через Wrangler**. Это лишний слой, и он ломается, потому что переменная
-`CLOUDFLARE_API_TOKEN` перебивает встроенную авторизацию Pages, а у самого
-токена **нет права `Cloudflare Pages: Edit`**.
+`wrangler versions upload` — команда **исключительно Workers**.
+У Cloudflare Pages такой команды не существует.
 
-Важно: «Super Administrator» в логе — это роль **твоего пользователя**,
-а не токена. У API-токена свой отдельный, гораздо более узкий набор прав.
-Поэтому `whoami` отрабатывает (хватает `User Details: Read`),
-а `pages deploy` — нет.
+## 1. История двух ошибок
 
-То, что `arescraftx.pages.dev` открывается, означает, что **старый деплой
-успел пройти раньше**. Сейчас публикуется именно он — все новые коммиты
-на сайт не попадают, пока сборка падает.
+### `Authentication error [code: 10000]` — ИСПРАВЛЕНО
 
-### Решение А (рекомендуется) — убрать Wrangler из сборки
+Возникала, пока команда деплоя была `npx wrangler pages deploy .`:
+токен Workers Builds не имеет прав на Pages API, поэтому запрос
+к `/accounts/.../pages/projects/arescraftx` отклонялся.
+После смены команды на Workers-вариант ошибка ушла.
 
-Сайт полностью статический, собирать нечего. Pages опубликует файлы из Git сам.
+### `Missing entry-point to Worker script or to assets directory` — ИСПРАВЛЕНО
 
-1. Dashboard → **Workers & Pages** → `arescraftx` → **Settings**
-2. Раздел **Build**:
+Wrangler не понимал, что публиковать: в репозитории не было `wrangler.jsonc`.
+Файл добавлен:
+
+```jsonc
+{
+	"name": "arescraftx",
+	"compatibility_date": "2026-08-27",
+	"assets": {
+		"directory": "./",
+		"not_found_handling": "404-page"
+	},
+	"observability": { "enabled": true }
+}
+```
+
+Проверено локально — `npx wrangler versions upload --dry-run` проходит без ошибок.
+
+| Файл | Зачем |
+|---|---|
+| `wrangler.jsonc` | точка входа: публикуем корень репозитория как статику |
+| `.assetsignore` | `.git`, `tools/`, `LICENSE`, `_headers` не попадают в публичный доступ |
+| `404.html` | страница ошибки для `not_found_handling: "404-page"` |
+
+---
+
+## 2. ВАЖНО: `versions upload` не публикует сайт
+
+Это главный подвох Workers Builds. Есть две разные команды:
+
+| Команда | Что делает |
+|---|---|
+| `npx wrangler versions upload` | загружает **версию**, но НЕ включает её. Сайт не меняется. |
+| `npx wrangler deploy` | загружает **и публикует**. Сайт обновляется. |
+
+Workers Builds подставляет `versions upload` для **непроизводственных веток**
+и `deploy` — для production-ветки.
+
+Раз в логе `versions upload`, значит собирается **не production-ветка**
+(скорее всего рабочая ветка `arena/01a043a9-arescraftx`).
+Даже когда сборка станет зелёной, **сайт не обновится**, пока изменения
+не попадут в production-ветку.
+
+### Что делать
+
+1. Влить рабочую ветку в `main` (Pull Request).
+2. Убедиться, что в проекте **Settings → Build**:
 
    | Поле | Значение |
    |---|---|
-   | Build command | *(пусто)* |
-   | **Deploy command** | *(пусто — удалить `npx wrangler pages deploy ...`)* |
-   | Build output directory | `/` |
-   | Framework preset | `None` |
    | Production branch | `main` |
+   | Build command | *(пусто)* |
+   | Deploy command | `npx wrangler deploy` |
+   | Non-production branch deploy command | `npx wrangler versions upload` |
 
-3. Раздел **Variables and Secrets**: удалить `CLOUDFLARE_API_TOKEN`
-   и `CLOUDFLARE_ACCOUNT_ID`, если они там есть.
-4. **Deployments** → **Retry deployment**.
+3. После мержа в `main` сборка выполнит `wrangler deploy` и сайт обновится.
 
-### Решение Б — оставить Wrangler, но дать токену права
-
-Нужно, только если деплой обязан идти через Wrangler (например, из GitHub Actions).
-
-1. https://dash.cloudflare.com/profile/api-tokens → нужный токен → **Edit**
-   (или **Create Token** → шаблон **«Edit Cloudflare Workers»**)
-2. Права минимум:
-
-   | Тип | Ресурс | Уровень |
-   |---|---|---|
-   | Account | **Cloudflare Pages** | **Edit** |
-   | Account | Account Settings | Read |
-   | User | User Details | Read |
-
-3. **Account Resources** → `Mhrtvb.a304093@gmail.com's Account`
-   (`3677ffcd173c6591fbcfd8a888ec8ca2`)
-4. Обновить переменную `CLOUDFLARE_API_TOKEN` в настройках проекта → Retry.
-
-> Про шаблоны токенов: «Read All Resources» не подходит — он умеет только
-> читать. Нужен именно **Edit**-шаблон, иначе будет ровно та же ошибка 10000.
+Опубликовать уже загруженную версию вручную можно так:
+**Workers & Pages** → `arescraftx` → **Deployments** → найти нужную версию →
+**Deploy version**.
 
 ---
 
-## 2. Домен arescraftx.online не открывается
+## 3. Домен arescraftx.online
 
-Зона в статусе Active — это значит, что **домен управляется Cloudflare**,
-но это ещё **не** значит, что он привязан к проекту Pages. Это два разных шага.
+У Worker'а домены настраиваются **не там**, где у Pages:
 
-1. Dashboard → **Workers & Pages** → `arescraftx` → вкладка **Custom domains**
-2. **Set up a domain** → ввести `arescraftx.online` → подтвердить
-3. Повторить для `www.arescraftx.online`
-4. Дождаться статуса **Active** у самого домена в этой вкладке
-   (обычно 1–5 минут, сертификат — до 15)
+**Workers & Pages** → `arescraftx` → **Settings** → **Domains & Routes** →
+**Add** → **Custom domain** → `arescraftx.online`.
 
-Проверить, что домен реально указывает на Pages:
-**DNS** зоны `arescraftx.online` → должна быть запись
+Cloudflare сам создаст нужную DNS-запись, так как зона уже Active.
+Повторить для `www.arescraftx.online`.
 
-```
-CNAME   @    arescraftx.pages.dev   (Proxied, оранжевое облако)
-```
+Технический адрес Worker'а — `arescraftx.<твой-субдомен>.workers.dev`
+(включается там же, в **Domains & Routes**).
 
-Если там A-запись на старый хостинг или запись вообще отсутствует —
-сайт открываться не будет, даже когда зона Active.
+> Если `arescraftx.pages.dev` открывается — значит рядом существует **ещё и
+> старый Pages-проект**. Тогда домен `arescraftx.online` может быть привязан
+> к нему, и после переезда на Worker его нужно перепривязать, иначе
+> посетители продолжат видеть старую версию сайта.
 
 ---
 
-## 3. Сайт не находится через поиск
+## 4. Сайт не находится через поиск
 
 Индексация не происходит автоматически и не мгновенно. Что было не так в коде:
 
@@ -132,7 +144,7 @@ site:arescraftx.online
 
 ---
 
-## 4. Обслуживание метатегов
+## 5. Обслуживание метатегов
 
 Все SEO-теги генерируются скриптом:
 
